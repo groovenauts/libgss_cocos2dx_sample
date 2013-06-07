@@ -1,5 +1,15 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Login : ログイン
+//
+// 1. Login with player_id : player_idを指定した通常のログイン
+// 2. No callback pattern  : コールバックなしのログイン
+// 3. Register and login   : 初回ログイン（サーバでplayer_idを生成してログイン）
+//
+// Register and login
+
 #include "LoginTest.h"
 
 #include <libGSS/libGSS.h>
@@ -97,7 +107,7 @@ void LoginTest::addKeyboardNotificationLayer(BaseNotificationLayer * pLayer)
 
 std::string LoginTestImpl::subtitle()
 {
-    return "Once enter in text field, and press ENTER.\nResponse is shown in log.";
+    return "1. Login with player_id";
 }
 
 void LoginTestImpl::execute()
@@ -129,7 +139,7 @@ void LoginTestImpl::OnComplete(libgss::LoginResponse *response){
 
 std::string LoginTestWithNoCallbackImpl::subtitle()
 {
-    return "No callback pattern";
+    return "2. No callback pattern";
 }
 
 void LoginTestWithNoCallbackImpl::execute()
@@ -176,7 +186,7 @@ void LoginTestWithNoCallbackImpl::poll(float timer){
 //////////////////////////////////////////////////////////////////////////
 
 std::string LoginTestWithRegisterImpl::subtitle(){
-    return "Register and login";
+    return "3. Register and login";
 }
 
 void LoginTestWithRegisterImpl::execute(){

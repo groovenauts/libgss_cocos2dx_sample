@@ -1,5 +1,15 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Get/Update Player: プレイヤーの取得と更新
+//
+// 1. Get Player by using GetPlayerAction : プレイヤーのデータを取得
+// 2. Descrement Level by 1 by using UpdatePlayerAction : レベルを１つ下げる
+// 3. Increment Level by 1 by using UpdatePlayerAction : レベルを１つ上げる
+//
+
+
 #include "PlayerTest.h"
 
 #include <libGSS/libGSS.h>
@@ -103,7 +113,7 @@ void PlayerTestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string PlayerTestJustGet::subtitle(){
-    return "Press Circle button to get Player.";
+    return "1. Get Player by using GetPlayerAction";
 }
 
 void PlayerTestJustGet::execute()
@@ -168,7 +178,7 @@ void PlayerTestGetAndUpdate::OnCompleteToGet(libgss::ActionResponse* response) {
 // implement PlayerTestDecrementLevel
 //////////////////////////////////////////////////////////////////////////
 std::string PlayerTestDecrementLevel::subtitle(){
-    return "Descrement Level by 1.";
+    return "2. Descrement Level by 1 by using UpdatePlayerAction";
 }
 void PlayerTestDecrementLevel::update(libgss::JSONObject* player){
     int level = player->get("level")->toInt();
@@ -181,7 +191,7 @@ void PlayerTestDecrementLevel::update(libgss::JSONObject* player){
 // implement PlayerTestIncrementLevel
 //////////////////////////////////////////////////////////////////////////
 std::string PlayerTestIncrementLevel::subtitle(){
-    return "Increment Level by 1.";
+    return "3. Increment Level by 1 by using UpdatePlayerAction";
 }
 void PlayerTestIncrementLevel::update(libgss::JSONObject* player){
     int level = player->get("level")->toInt();

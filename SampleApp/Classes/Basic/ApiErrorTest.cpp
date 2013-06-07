@@ -6,6 +6,14 @@
 //
 //
 
+//
+// メニュー名
+// API Error Test: APIエラーのテスト
+//
+// 1. Action request to invalid URL: 繋がらないURLへのアクションリクエスト
+// 2. Login request with invalid player ID: 不正なプレイヤーIDでのログインリクエスト
+//
+
 #include "ApiErrorTest.h"
 
 #include <sstream>
@@ -135,7 +143,7 @@ void ApiErrorTestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string ApiErrorTestInvalidURL::subtitle(){
-    return "Action request to invalid URL.";
+    return "1. Action request to invalid URL";
 }
 
 void ApiErrorTestInvalidURL::execute(){
@@ -169,7 +177,7 @@ void ApiErrorTestInvalidURL::OnComplete(libgss::ActionResponse* response){
 //////////////////////////////////////////////////////////////////////////
 
 std::string ApiErrorTestInvalidPlayerId::subtitle(){
-    return "Login request with invalid player ID.";
+    return "2. Login request with invalid player ID";
 }
 
 void ApiErrorTestInvalidPlayerId::execute(){

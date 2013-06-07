@@ -1,5 +1,13 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Simple Action : 簡単なアクションのテスト
+//
+// 1. 1 action in 1 request: 1アクションを実行するリクエスト
+// 2. no callback pattern  : コールバックなしのパターン
+//
+
 #include "SimpleActionTest.h"
 
 #include <libGSS/libGSS.h>
@@ -100,7 +108,7 @@ void SimpleActionTestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string SimpleActionTest1Action::subtitle(){
-    return "1 action in 1 request";
+    return "1. 1 action in 1 request";
 }
 
 void SimpleActionTest1Action::execute(){
@@ -128,7 +136,7 @@ void SimpleActionTest1Action::execute(){
 //////////////////////////////////////////////////////////////////////////
 
 std::string SimpleActionTestWithNoCallback::subtitle(){
-    return "no callback pattern";
+    return "2. no callback pattern";
 }
 
 

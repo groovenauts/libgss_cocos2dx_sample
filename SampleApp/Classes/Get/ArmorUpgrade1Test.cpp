@@ -1,5 +1,13 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Get Dictionary : 辞書テーブルからの取得
+//
+// 1. Get ArmorUpgrade1 by using GetDictionaryAction
+//    入力を指定して辞書テーブルから出力を取得する
+//
+
 #include "ArmorUpgrade1Test.h"
 
 #include <libGSS/libGSS.h>
@@ -99,7 +107,7 @@ void ArmorUpgrade1TestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string ArmorUpgrade1TestJustGet::subtitle(){
-    return "Press Circle button to get ArmorUpgrade1.";
+    return "1. Get ArmorUpgrade1 by using GetDictionaryAction";
 }
 
 void ArmorUpgrade1TestJustGet::execute()

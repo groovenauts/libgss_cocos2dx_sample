@@ -921,14 +921,14 @@
 		670252A41740B87B00BFFE22 /* Get */ = {
 			isa = PBXGroup;
 			children = (
-				670252B41740DD8600BFFE22 /* Composition1Test.cpp */,
-				670252B51740DD8600BFFE22 /* Composition1Test.h */,
-				670252B11740DA8700BFFE22 /* RequiredExperienceTest.cpp */,
-				670252B21740DA8700BFFE22 /* RequiredExperienceTest.h */,
-				670252AE1740D87400BFFE22 /* ShopScheduleTest.cpp */,
-				670252AF1740D87400BFFE22 /* ShopScheduleTest.h */,
 				670252AB1740BA0000BFFE22 /* ArmorUpgrade1Test.cpp */,
 				670252AC1740BA0000BFFE22 /* ArmorUpgrade1Test.h */,
+				670252AE1740D87400BFFE22 /* ShopScheduleTest.cpp */,
+				670252AF1740D87400BFFE22 /* ShopScheduleTest.h */,
+				670252B11740DA8700BFFE22 /* RequiredExperienceTest.cpp */,
+				670252B21740DA8700BFFE22 /* RequiredExperienceTest.h */,
+				670252B41740DD8600BFFE22 /* Composition1Test.cpp */,
+				670252B51740DD8600BFFE22 /* Composition1Test.h */,
 			);
 			name = Get;
 			path = Classes/Get;
@@ -965,10 +965,10 @@
 		679FE36D173CFAE000983108 /* Update */ = {
 			isa = PBXGroup;
 			children = (
-				670252A11740AC0500BFFE22 /* PlayerTest.cpp */,
-				670252A21740AC0500BFFE22 /* PlayerTest.h */,
 				679FE36E173CFAE100983108 /* GameDataTest.cpp */,
 				679FE36F173CFAE100983108 /* GameDataTest.h */,
+				670252A11740AC0500BFFE22 /* PlayerTest.cpp */,
+				670252A21740AC0500BFFE22 /* PlayerTest.h */,
 			);
 			name = Update;
 			path = Classes/Update;
@@ -977,10 +977,10 @@
 		67C3FF2717422B4E0028A35C /* Create */ = {
 			isa = PBXGroup;
 			children = (
-				6767B364174376C90058ED07 /* ItemOutgoingLogTest.cpp */,
-				6767B365174376C90058ED07 /* ItemOutgoingLogTest.h */,
 				67C3FF2B17422C120028A35C /* GreetingHistoryTest.cpp */,
 				67C3FF2C17422C120028A35C /* GreetingHistoryTest.h */,
+				6767B364174376C90058ED07 /* ItemOutgoingLogTest.cpp */,
+				6767B365174376C90058ED07 /* ItemOutgoingLogTest.h */,
 			);
 			name = Create;
 			path = Classes/Create;
@@ -1085,12 +1085,12 @@
 		A9B37E46170EE7BA0046E784 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A925CCC3175E056F001593E1 /* Asset */,
 				6767B36717437C330058ED07 /* Basic */,
 				679FE360173CA01900983108 /* Master */,
 				679FE36D173CFAE000983108 /* Update */,
 				670252A41740B87B00BFFE22 /* Get */,
 				67C3FF2717422B4E0028A35C /* Create */,
+				A925CCC3175E056F001593E1 /* Asset */,
 				67D0FBCB17310A3A00F2D2B0 /* testResource.h */,
 				67D0FBCC17310A3A00F2D2B0 /* tests.h */,
 				67D0FBBE1731082500F2D2B0 /* controller.cpp */,

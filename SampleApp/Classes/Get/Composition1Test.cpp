@@ -1,5 +1,16 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Get/Dice Probability : 確率テーブルからの取得と抽選
+//
+// 1. Get Composition1 by using GetProbabilityAction
+//    ある結果について確率テーブルから情報を取得する
+//
+// 2. Dice for {\"10001\": 3} by using DiceAction
+//    確率抽選
+//
+
 #include "Composition1Test.h"
 
 #include <libGSS/libGSS.h>
@@ -101,7 +112,7 @@ void Composition1TestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string Composition1TestJustGet::subtitle(){
-    return "Press Circle button to get Player.";
+    return "1. Get Composition1 by using GetProbabilityAction";
 }
 
 void Composition1TestJustGet::execute()
@@ -133,7 +144,7 @@ std::string Composition1TestJustGet::defaultValue(){
 //////////////////////////////////////////////////////////////////////////
 
 std::string Composition1TestDice1::subtitle(){
-    return "Dice for {\"10001\": 3}";
+    return "2. Dice for {\"10001\": 3} by using DiceAction";
 }
 
 void Composition1TestDice1::execute()

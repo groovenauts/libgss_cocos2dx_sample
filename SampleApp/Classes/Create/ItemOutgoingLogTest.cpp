@@ -1,5 +1,13 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Create Log : ログの登録
+//
+// 1. Create ItemOutgoingLog by using CreateAction
+//    ログの登録
+//
+
 #include "ItemOutgoingLogTest.h"
 
 #include <libGSS/libGSS.h>
@@ -98,7 +106,7 @@ void ItemOutgoingLogTestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string ItemOutgoingLogTestCreate::subtitle(){
-    return "Press Circle button to create ItemOutgoingLog.";
+    return "1. Create ItemOutgoingLog by using CreateAction";
 }
 
 void ItemOutgoingLogTestCreate::execute(){

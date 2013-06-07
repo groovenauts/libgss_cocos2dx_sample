@@ -1,5 +1,16 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Create/All History : 履歴の登録と取得
+//
+// 1. Create GreetingHistory by using CreateAction
+//    履歴の登録
+//
+// 2. Fetch akk GreetingHistory by using AllAction
+//    履歴の取得
+//
+
 #include "GreetingHistoryTest.h"
 
 #include <libGSS/libGSS.h>
@@ -100,7 +111,7 @@ void GreetingHistoryTestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string GreetingHistoryTestCreate::subtitle(){
-    return "Press Circle button to create GreetingHistory.";
+    return "1. Create GreetingHistory by using CreateAction";
 }
 
 void GreetingHistoryTestCreate::execute(){
@@ -131,7 +142,7 @@ void GreetingHistoryTestCreate::execute(){
 //////////////////////////////////////////////////////////////////////////
 
 std::string GreetingHistoryTestFetchAll::subtitle(){
-    return "Press Circle button to get GreetingHistory.";
+    return "2. Fetch akk GreetingHistory by using AllAction";
 }
 
 void GreetingHistoryTestFetchAll::execute()

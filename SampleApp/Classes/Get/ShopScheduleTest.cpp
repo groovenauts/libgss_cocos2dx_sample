@@ -1,5 +1,14 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Get Schedule : 期間テーブルからの取得
+//
+// 1. Get ShopSchedule by using GetScheduleAction
+//    日時を指定してその日時に該当する値を取得
+//
+
+
 #include "ShopScheduleTest.h"
 
 #include <libGSS/libGSS.h>
@@ -99,7 +108,7 @@ void ShopScheduleTestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string ShopScheduleTestJustGet::subtitle(){
-    return "Press Circle button to get Player.";
+    return "1. Get ShopSchedule by using GetScheduleAction";
 }
 
 void ShopScheduleTestJustGet::execute()

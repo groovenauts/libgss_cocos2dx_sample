@@ -1,5 +1,13 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Get IntRange : 整数範囲テーブルからの取得
+//
+// 1. Get RequiredExperience by using GetIntRangeAction
+//    整数を指定して、その整数に対応する値を取得
+//
+
 #include "RequiredExperienceTest.h"
 
 #include <libGSS/libGSS.h>
@@ -99,7 +107,7 @@ void RequiredExperienceTestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string RequiredExperienceTestJustGet::subtitle(){
-    return "Press Circle button to get Player.";
+    return "1. Get RequiredExperience by using GetIntRangeAction";
 }
 
 void RequiredExperienceTestJustGet::execute()

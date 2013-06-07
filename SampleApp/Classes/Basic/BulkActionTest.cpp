@@ -1,5 +1,17 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Bulk Action : バルクアクションのテスト
+//
+// 1. 3 actions in 1 request
+//    3つのアクションを1リクエストで送信するパターン
+//
+// 2. 2 success actions and 1 error action in 1 request:
+//    ３つのアクションを１つのリクエストで送信し、そのうち２つは成功するが１つは失敗するパターン
+// 
+
+
 #include "BulkActionTest.h"
 
 #include <libGSS/libGSS.h>
@@ -100,7 +112,7 @@ void BulkActionTestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string BulkActionTest3Actions::subtitle(){
-    return "3 actions in 1 request";
+    return "1. 3 actions in 1 request";
 }
 
 void BulkActionTest3Actions::execute(){
@@ -143,7 +155,7 @@ void BulkActionTest3Actions::execute(){
 //////////////////////////////////////////////////////////////////////////
 
 std::string BulkActionTest2Success1Error::subtitle(){
-    return "2 success actions and 1 error action in 1 request";
+    return "2. 2 success actions and 1 error action in 1 request";
 }
 
 void BulkActionTest2Success1Error::execute(){

@@ -1,5 +1,19 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Get/Update GameData : ゲームデータの取得と更新
+//
+// item_cd 20001はポーションです。
+//
+// 1. Get GameData
+// 2. Descrement HP by 7 by using UpdateGameDataAction : HPを7減らす
+// 3. Increment HP by 5 by using UpdateGameDataAction : HPを5増やす
+// 4. Waste Potion by using UpdateGameDataAction : ポーションを１つ捨てる
+// 5. Get Potion by using UpdateGameDataAction : ポーションを１つ増やす
+// 6. Use Item by using ExecuteAction : アイテムを使用する
+//
+
 #include "GameDataTest.h"
 
 #include <libGSS/libGSS.h>
@@ -109,7 +123,7 @@ void GameDataTestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string GameDataTestJustGet::subtitle(){
-    return "Press Circle button to get GameData.";
+    return "1. Get GameData";
 }
 
 void GameDataTestJustGet::execute()
@@ -178,7 +192,7 @@ void GameDataTestGetAndUpdate::OnCompleteToGet(libgss::ActionResponse* response)
 // implement GameDataTestDecrementHP
 //////////////////////////////////////////////////////////////////////////
 std::string GameDataTestDecrementHP::subtitle(){
-    return "Descrement HP by 7.";
+    return "2. Descrement HP by 7 by using UpdateGameDataAction";
 }
 void GameDataTestDecrementHP::update(libgss::JSONObject* gameData){
     int hp = gameData->get("content")->get("hp")->toInt();
@@ -191,7 +205,7 @@ void GameDataTestDecrementHP::update(libgss::JSONObject* gameData){
 // implement GameDataTestIncrementHP
 //////////////////////////////////////////////////////////////////////////
 std::string GameDataTestIncrementHP::subtitle(){
-    return "Increment HP by 5.";
+    return "3. Increment HP by 5 by using UpdateGameDataAction";
 }
 void GameDataTestIncrementHP::update(libgss::JSONObject* gameData){
     int hp = gameData->get("content")->get("hp")->toInt();
@@ -206,7 +220,7 @@ void GameDataTestIncrementHP::update(libgss::JSONObject* gameData){
 // implement GameDataTestDecrementPotion
 //////////////////////////////////////////////////////////////////////////
 std::string GameDataTestDecrementPotion::subtitle(){
-    return "Waste Potion.";
+    return "4. Waste Potion by using UpdateGameDataAction";
 }
 void GameDataTestDecrementPotion::update(libgss::JSONObject* gameData){
     libgss::JSONObject* items = gameData->get("content")->get("items");
@@ -223,7 +237,7 @@ void GameDataTestDecrementPotion::update(libgss::JSONObject* gameData){
 // implement GameDataTestIncrementPotion
 //////////////////////////////////////////////////////////////////////////
 std::string GameDataTestIncrementPotion::subtitle(){
-    return "Get Potion";
+    return "5. Get Potion by using UpdateGameDataAction";
 }
 void GameDataTestIncrementPotion::update(libgss::JSONObject* gameData){
     libgss::JSONObject* items = gameData->get("content")->get("items");
@@ -238,7 +252,7 @@ void GameDataTestIncrementPotion::update(libgss::JSONObject* gameData){
 //////////////////////////////////////////////////////////////////////////
 
 std::string ExecuteActionTestUseItem::subtitle(){
-    return "Use Item";
+    return "6. Use Item by using ExecuteAction";
 }
 
 void ExecuteActionTestUseItem::execute(){

@@ -1,5 +1,14 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// Asset Test : アセットのテスト
+//
+// アセットをダウンロードするテスト
+// 1. 1. Basic asset request by using AssetRequest : コールバックを使うパターン
+// 2. No callback pattern by using AssetRequest : コールバックを使わないパターン
+//
+
 #include "AssetTest.h"
 
 #include "cocos2d.h"
@@ -103,7 +112,7 @@ void AssetTestScene::runThisTest()
 //////////////////////////////////////////////////////////////////////////
 
 std::string AssetTestBasic::subtitle(){
-    return "basic asset request";
+    return "1. Basic asset request by using AssetRequest";
 }
 
 void AssetTestBasic::execute(){
@@ -159,7 +168,7 @@ void AssetTestBasic::OnComplete(libgss::AssetResponse* response){
 //////////////////////////////////////////////////////////////////////////
 
 std::string AssetTestWithNoCallback::subtitle(){
-    return "no callback pattern";
+    return "2. No callback pattern by using AssetRequest";
 }
 
 

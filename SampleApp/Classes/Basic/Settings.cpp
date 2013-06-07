@@ -6,6 +6,16 @@
 //
 //
 
+// メニュー名
+// Settings : 接続先設定画面
+//
+// 以下の項目を設定可能です。
+// * host名
+// * HTTPのポート
+// * HTTPS（SSL）のポート
+// * 公開アセットを取得するURLのルート
+//
+
 #include <iostream>
 
 #include <libGSS/libGSS.h>
@@ -143,7 +153,7 @@ void SettingsLayer::onEnter()
 
     // Public Asset Root設定
     float publicAssetRootY = visibleOrigin.y + visibleSize.height * 4 / 10;
-    CCLabelTTF* publicAssetRootLabel = CCLabelTTF::create("SSL port", "Arial", 18);
+    CCLabelTTF* publicAssetRootLabel = CCLabelTTF::create("Public Asset Root", "Arial", 18);
     publicAssetRootLabel->setPosition(ccp(50 + labelSize.width, publicAssetRootY));
     publicAssetRootLabel->setColor(ccWHITE);
     publicAssetRootLabel->setAnchorPoint(ccp(1, 0.5));

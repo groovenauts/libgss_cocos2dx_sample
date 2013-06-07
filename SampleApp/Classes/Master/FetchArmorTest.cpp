@@ -1,5 +1,18 @@
 // #define COCOS2D_DEBUG   1
 
+//
+// メニュー名
+// All Master : マスタの取得
+//
+// 1. Fetch all armor by using AllAction : 全件取得
+// 2. Fetch armors deffence_pt = 24 by using AllAction : 条件指定 一致の場合
+// 3. Fetch armors (offence_pt >= 10) and (offence_pt < 20) : 条件指定 AND
+// 4. Fetch armors (offence_pt >= 25) or (deffence_pt >= 20) : 条件指定 OR
+// 5. Fetch armors (armor_id >= 10010) and ((offence_pt >= 25) or (deffence_pt >= 20)) : 条件指定 複合条件
+// 6. Pagination with perPage = 5 by using AllAction : ページネーション
+//
+
+
 #include "FetchArmorTest.h"
 
 #include <libGSS/libGSS.h>
@@ -141,7 +154,7 @@ void FetchArmorAction::OnComplete(libgss::ActionResponse* response){
 //////////////////////////////////////////////////////////////////////////
 
 std::string FetchArmorTestNoConditions::subtitle(){
-    return "Press Circle button to fetch all data.\nResponse is shown in log.";
+    return "1. Fetch all armor by using AllAction";
 }
 
 void FetchArmorTestNoConditions::buildCondition(libgss::Conditions *conditions) {
@@ -153,7 +166,7 @@ void FetchArmorTestNoConditions::buildCondition(libgss::Conditions *conditions) 
 //////////////////////////////////////////////////////////////////////////
 
 std::string FetchArmorTestSimpleConditions::subtitle(){
-    return "deffence_pt = 24";
+    return "2. Fetch armors deffence_pt = 24 by using AllAction";
 }
 
 void FetchArmorTestSimpleConditions::buildCondition(libgss::Conditions *conditions)
@@ -166,7 +179,7 @@ void FetchArmorTestSimpleConditions::buildCondition(libgss::Conditions *conditio
 //////////////////////////////////////////////////////////////////////////
 
 std::string FetchArmorTestAndJoined::subtitle(){
-    return "(offence_pt >= 10) and (offence_pt < 20)";
+    return "3. Fetch armors (offence_pt >= 10) and (offence_pt < 20)";
 }
 
 void FetchArmorTestAndJoined::buildCondition(libgss::Conditions *conditions)
@@ -179,7 +192,7 @@ void FetchArmorTestAndJoined::buildCondition(libgss::Conditions *conditions)
 //////////////////////////////////////////////////////////////////////////
 
 std::string FetchArmorTestOrJoined::subtitle(){
-    return "(offence_pt >= 25) or (deffence_pt >= 20)";
+    return "4. Fetch armors (offence_pt >= 25) or (deffence_pt >= 20)";
 }
 
 void FetchArmorTestOrJoined::buildCondition(libgss::Conditions *conditions)
@@ -194,7 +207,7 @@ void FetchArmorTestOrJoined::buildCondition(libgss::Conditions *conditions)
 //////////////////////////////////////////////////////////////////////////
 
 std::string FetchArmorTestNestedConditions::subtitle(){
-    return "(armor_id >= 10010) and\n ((offence_pt >= 25) or (deffence_pt >= 20))";
+    return "5. Fetch armors (armor_id >= 10010) and\n ((offence_pt >= 25) or (deffence_pt >= 20))";
 }
 
 void FetchArmorTestNestedConditions::buildCondition(libgss::Conditions *conditions)
@@ -213,7 +226,7 @@ void FetchArmorTestNestedConditions::buildCondition(libgss::Conditions *conditio
 //////////////////////////////////////////////////////////////////////////
 
 std::string FetchArmorPaginateAction::subtitle() {
-    return "pagination with perPage = 5";
+    return "6. Pagination with perPage = 5 by using AllAction";
 }
 
 void FetchArmorPaginateAction::execute()
