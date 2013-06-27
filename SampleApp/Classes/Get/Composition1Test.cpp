@@ -122,7 +122,8 @@ void Composition1TestJustGet::execute()
     
     libgss::GetProbabilityAction* action = new libgss::GetProbabilityAction("Composition1", text_field->getString());
     // action->setPlayerId(kDefaultFindPlayerId);
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(Composition1TestJustGet::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(Composition1TestJustGet::OnComplete));
     request->addAction(action);
     libgss::Network::instance()->send(request);
     request->release();
@@ -158,7 +159,8 @@ void Composition1TestDice1::execute()
     libgss::DiceAction* action = new libgss::DiceAction("Composition1");
     action->conditions()->add("element", obj);
     // action->setPlayerId(kDefaultFindPlayerId);
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(Composition1TestDice1::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(Composition1TestDice1::OnComplete));
     request->addAction(action);
     libgss::Network::instance()->send(request);
     request->release();

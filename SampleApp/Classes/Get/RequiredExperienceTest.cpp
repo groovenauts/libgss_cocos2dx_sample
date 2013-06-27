@@ -116,7 +116,8 @@ void RequiredExperienceTestJustGet::execute()
     CCLOG("now sending request with get action.");
     
     libgss::GetIntRangeAction* action = new libgss::GetIntRangeAction("RequiredExperience", textFieldAsInt());
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(RequiredExperienceTestJustGet::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(RequiredExperienceTestJustGet::OnComplete));
     request->addAction(action);
     libgss::Network::instance()->send(request);
     request->release();

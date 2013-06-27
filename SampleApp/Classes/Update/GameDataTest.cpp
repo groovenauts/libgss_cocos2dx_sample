@@ -132,7 +132,8 @@ void GameDataTestJustGet::execute()
     
     CCLOG("now sending request with all action.");
     
-    libgss::ActionRequest *request = new libgss::ActionRequest(this, gssActionResponse(GameDataTestJustGet::OnComplete));
+    libgss::ActionRequest *request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(GameDataTestJustGet::OnComplete));
     
     libgss::GetGameDataAction* getAction = new libgss::GetGameDataAction();
     request->addAction(getAction);
@@ -154,7 +155,8 @@ void GameDataTestGetAndUpdate::execute(){
     CCLOG("GameDataTestDecrementHP::execute");
     CCLOG("now sending request with get action.");
     
-    libgss::ActionRequest *request = new libgss::ActionRequest(this, gssActionResponse(GameDataTestDecrementHP::OnCompleteToGet));
+    libgss::ActionRequest *request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(GameDataTestDecrementHP::OnCompleteToGet));
     
     libgss::GetGameDataAction* getAction = new libgss::GetGameDataAction();
     request->addAction(getAction);
@@ -176,7 +178,8 @@ void GameDataTestGetAndUpdate::OnCompleteToGet(libgss::ActionResponse* response)
     
     update(gameData);
     
-    libgss::ActionRequest *request = new libgss::ActionRequest(this, gssActionResponse(GameDataTestDecrementHP::OnCompleteToUpdate));
+    libgss::ActionRequest *request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(GameDataTestDecrementHP::OnCompleteToUpdate));
     libgss::UpdateGameDataAction* updateAction = new libgss::UpdateGameDataAction(*gameData);
     request->addAction(updateAction);
     libgss::Network::instance()->send(request);
@@ -259,7 +262,8 @@ void ExecuteActionTestUseItem::execute(){
         CCLOG("ExecuteActionTestUseItem::execute");
         CCLOG("now sending request with bulk actions.");
     
-        libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(ExecuteActionTestUseItem::OnComplete));
+        libgss::ActionRequest* request = new libgss::ActionRequest();
+        request->setCallback(this, gssActionResponse(ExecuteActionTestUseItem::OnComplete));
     
         libgss::ExecuteAction* action = new libgss::ExecuteAction("ItemRubyStoredScript", "use_item");
         action->setId(1);

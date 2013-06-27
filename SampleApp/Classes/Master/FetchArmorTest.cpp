@@ -127,7 +127,8 @@ void FetchArmorAction::execute()
     
     CCLOG("now sending request with all action.");
     
-    libgss::ActionRequest *request = new libgss::ActionRequest(this, gssActionResponse(FetchArmorTestNoConditions::OnComplete));
+    libgss::ActionRequest *request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(FetchArmorTestNoConditions::OnComplete));
     libgss::AllAction* action = new libgss::AllAction("Armor");
     action->orders()->add("armor_id", libgss::Orders::Orders::kAsc);
     buildCondition(action->conditions());
@@ -235,7 +236,8 @@ void FetchArmorPaginateAction::execute()
     
     CCLOG("now sending request with all action.");
     
-    libgss::ActionRequest *request = new libgss::ActionRequest(this, gssActionResponse(FetchArmorTestNoConditions::OnComplete));
+    libgss::ActionRequest *request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(FetchArmorTestNoConditions::OnComplete));
     libgss::AllAction* action = new libgss::AllAction("Armor");
     action->orders()->add("armor_id", libgss::Orders::Orders::kAsc);
     action->setPagenation(textFieldAsInt(), 5);

@@ -116,8 +116,8 @@ void LoginTestImpl::execute()
     
     CCLOG("now sending login request...");
     
-    libgss::LoginRequest *request = new libgss::LoginRequest(text_field->getString(), "ichiro",
-                                                               this, gssLoginResponse(LoginTestImpl::OnComplete));
+    libgss::LoginRequest *request = new libgss::LoginRequest(text_field->getString(), "ichiro");
+    request->setCallback(this, gssLoginResponse(LoginTestImpl::OnComplete));
     libgss::Network::instance()->send(request);
     request->release();
     
@@ -194,8 +194,8 @@ void LoginTestWithRegisterImpl::execute(){
     
     CCLOG("now sending login request...");
     
-    libgss::LoginRequest *request = new libgss::LoginRequest("", "",
-                                                             this, gssLoginResponse(LoginTestWithRegisterImpl::OnComplete));
+    libgss::LoginRequest *request = new libgss::LoginRequest("", "");
+    request->setCallback(this, gssLoginResponse(LoginTestImpl::OnComplete));
     libgss::Network::instance()->send(request);
     request->release();
     

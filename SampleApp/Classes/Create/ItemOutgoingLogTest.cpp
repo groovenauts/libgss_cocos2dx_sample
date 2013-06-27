@@ -123,7 +123,8 @@ void ItemOutgoingLogTestCreate::execute(){
     
     libgss::CreateAction* action = new libgss::CreateAction("ItemOutgoingLog", attrs);
     // action->setPlayerId(kDefaultFindPlayerId);
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(ItemOutgoingLogTestCreate::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(ItemOutgoingLogTestCreate::OnComplete));
     request->addAction(action);
     libgss::Network::instance()->send(request);
     request->release();
