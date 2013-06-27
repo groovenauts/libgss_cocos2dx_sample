@@ -116,7 +116,8 @@ void ArmorUpgrade1TestJustGet::execute()
     CCLOG("now sending request with get action.");
     
     libgss::GetDictionaryAction* action = new libgss::GetDictionaryAction("ArmorUpgrade1", text_field->getString());
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(ArmorUpgrade1TestJustGet::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(ArmorUpgrade1TestJustGet::OnComplete));
     request->addAction(action);
     libgss::Network::instance()->send(request);
     request->release();

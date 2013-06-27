@@ -153,7 +153,8 @@ void ApiErrorTestInvalidURL::execute(){
     
     CCLOG("now sending request.");
     
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(ApiErrorTestInvalidURL::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(ApiErrorTestInvalidURL::OnComplete));
     
     libgss::CountAction* action = new libgss::CountAction("Armor");
     action->setId(1);
@@ -184,8 +185,8 @@ void ApiErrorTestInvalidPlayerId::execute(){
     CCLOG("ApiErrorTestInvalidPlayerId::execute");
     CCLOG("now sending request.");
     
-    libgss::LoginRequest* request = new libgss::LoginRequest("non-exists-player-id", "ichiro",
-                                                             this, gssLoginResponse(ApiErrorTestInvalidPlayerId::OnComplete));
+    libgss::LoginRequest* request = new libgss::LoginRequest("non-exists-player-id", "ichiro");
+    request->setCallback(this, gssLoginResponse(ApiErrorTestInvalidPlayerId::OnComplete));
     libgss::Network::instance()->send(request);
     request->release();
     
