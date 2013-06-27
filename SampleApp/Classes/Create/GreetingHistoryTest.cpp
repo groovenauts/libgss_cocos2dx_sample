@@ -126,7 +126,8 @@ void GreetingHistoryTestCreate::execute(){
     
     libgss::CreateAction* action = new libgss::CreateAction("GreetingHistory", attrs);
     // action->setPlayerId(kDefaultFindPlayerId);
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(GreetingHistoryTestCreate::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(GreetingHistoryTestCreate::OnComplete));
     request->addAction(action);
     libgss::Network::instance()->send(request);
     request->release();
@@ -152,7 +153,8 @@ void GreetingHistoryTestFetchAll::execute()
     
     libgss::AllAction* action = new libgss::AllAction("GreetingHistory");
     // action->setPlayerId(kDefaultFindPlayerId);
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(GreetingHistoryTestFetchAll::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(GreetingHistoryTestFetchAll::OnComplete));
     request->addAction(action);
     libgss::Network::instance()->send(request);
     request->release();

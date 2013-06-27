@@ -122,7 +122,8 @@ void ShopScheduleTestJustGet::execute()
         action->setTime(s);
     }
     // action->setPlayerId(kDefaultFindPlayerId);
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(ShopScheduleTestJustGet::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(ShopScheduleTestJustGet::OnComplete));
     request->addAction(action);
     libgss::Network::instance()->send(request);
     request->release();

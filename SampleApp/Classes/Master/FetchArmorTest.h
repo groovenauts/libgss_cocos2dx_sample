@@ -23,10 +23,8 @@ public:
 class FetchArmorTestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
-
 
 
 class FetchArmorAction : public BaseNotificationLayer
@@ -37,8 +35,6 @@ public:
     
     void OnComplete(libgss::ActionResponse* response);
 };
-
-
 
 class FetchArmorTestNoConditions : public FetchArmorAction
 {

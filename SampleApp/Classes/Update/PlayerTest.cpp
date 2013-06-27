@@ -123,7 +123,8 @@ void PlayerTestJustGet::execute()
     
     libgss::GetPlayerAction* action = new libgss::GetPlayerAction();
     // action->setPlayerId(kDefaultFindPlayerId);
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(PlayerTestJustGet::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(PlayerTestJustGet::OnComplete));
     request->addAction(action);
     libgss::Network::instance()->send(request);
     request->release();
@@ -144,7 +145,8 @@ void PlayerTestGetAndUpdate::execute(){
     
     libgss::GetPlayerAction* action = new libgss::GetPlayerAction();
     // action->setPlayerId(kDefaultFindPlayerId);
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(PlayerTestGetAndUpdate::OnCompleteToGet));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(PlayerTestGetAndUpdate::OnCompleteToGet));
     request->addAction(action);
     libgss::Network::instance()->send(request);
     request->release();
@@ -163,7 +165,8 @@ void PlayerTestGetAndUpdate::OnCompleteToGet(libgss::ActionResponse* response) {
     
     update(player);
     
-    libgss::ActionRequest *request = new libgss::ActionRequest(this, gssActionResponse(PlayerTestGetAndUpdate::OnCompleteToUpdate));
+    libgss::ActionRequest *request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(PlayerTestGetAndUpdate::OnCompleteToUpdate));
     libgss::UpdatePlayerAction* updateAction = new libgss::UpdatePlayerAction(*player);
     request->addAction(updateAction);
     libgss::Network::instance()->send(request);

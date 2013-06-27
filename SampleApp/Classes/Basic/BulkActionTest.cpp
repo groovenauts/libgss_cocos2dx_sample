@@ -119,7 +119,8 @@ void BulkActionTest3Actions::execute(){
     CCLOG("BulkActionTest3Actions::execute");
     CCLOG("now sending request with bulk actions.");
     
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(BulkActionTest3Actions::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(BulkActionTest3Actions::OnComplete));
     
     libgss::AllAction* action1 = new libgss::AllAction("Armor");
     action1->setId(1);
@@ -162,7 +163,8 @@ void BulkActionTest2Success1Error::execute(){
     CCLOG("BulkActionTest2Success1Error::execute");
     CCLOG("now sending request with bulk actions.");
     
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(BulkActionTest3Actions::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(BulkActionTest3Actions::OnComplete));
     
     libgss::AllAction* action1 = new libgss::AllAction("Armor");
     action1->setId(1);

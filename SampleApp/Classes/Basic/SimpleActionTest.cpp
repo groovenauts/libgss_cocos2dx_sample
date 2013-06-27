@@ -115,7 +115,8 @@ void SimpleActionTest1Action::execute(){
     CCLOG("SimpleActionTest1Action::execute");
     CCLOG("now sending request with bulk actions.");
     
-    libgss::ActionRequest* request = new libgss::ActionRequest(this, gssActionResponse(SimpleActionTest1Action::OnComplete));
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(SimpleActionTest1Action::OnComplete));
     
     libgss::AllAction* action = new libgss::AllAction("Armor");
     action->setId(1);
