@@ -30,6 +30,7 @@ public:
     static const char* kSettingsKeyHttpPort;
     static const char* kSettingsKeySslPort;
     static const char* kSettingsKeyPublicAssetRoot;
+    static const char* kSettingsKeyConsumerSecret;
 };
 
 class SettingsLayer : public CCLayer, public cocos2d::extension::CCEditBoxDelegate
@@ -50,6 +51,7 @@ private:
     cocos2d::extension::CCEditBox* httpPortEditBox_;
     cocos2d::extension::CCEditBox* sslPortEditBox_;
     cocos2d::extension::CCEditBox* publicAssetRootEditBox_;
+    cocos2d::extension::CCEditBox* consumerSecretEditBox_;
 };
 
 

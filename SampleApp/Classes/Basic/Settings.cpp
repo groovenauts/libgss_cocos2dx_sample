@@ -32,6 +32,7 @@ const char* Settings::kSettingsKeyHost = "jp.groovenauts.libgss.host";
 const char* Settings::kSettingsKeyHttpPort = "jp.groovenauts.libgss.http_port";
 const char* Settings::kSettingsKeySslPort = "jp.groovenauts.libgss.ssl_port";
 const char* Settings::kSettingsKeyPublicAssetRoot = "jp.groovenauts.libgss.public_asset_root";
+const char* Settings::kSettingsKeyConsumerSecret = "jp.groovenauts.libgss.consumer_secret";
 
 
 void Settings::applySettings(){
@@ -54,6 +55,10 @@ void Settings::applySettings(){
     libgss::Network::instance()->setPublicAssetRoot(publicAssetRoot);
     CCLog("Public asset root: %s", publicAssetRoot.c_str());
 
+    std::string consumerSecret = CCUserDefault::sharedUserDefault()->getStringForKey(kSettingsKeyConsumerSecret, "");
+    libgss::Network::instance()->setConsumerSecret(consumerSecret);
+    CCLog("Consumer secret: %s", consumerSecret.c_str());
+    
 #ifdef __APPLE__
 #include "TargetConditionals.h"
 #if TARGET_IPHONE_SIMULATOR
@@ -153,7 +158,7 @@ void SettingsLayer::onEnter()
 
     // Public Asset Root設定
     float publicAssetRootY = visibleOrigin.y + visibleSize.height * 4 / 10;
-    CCLabelTTF* publicAssetRootLabel = CCLabelTTF::create("Public Asset Root", "Arial", 18);
+    CCLabelTTF* publicAssetRootLabel = CCLabelTTF::create("Public Asset Root", "Arial", 12);
     publicAssetRootLabel->setPosition(ccp(50 + labelSize.width, publicAssetRootY));
     publicAssetRootLabel->setColor(ccWHITE);
     publicAssetRootLabel->setAnchorPoint(ccp(1, 0.5));
@@ -170,6 +175,26 @@ void SettingsLayer::onEnter()
     std::string publicAssetRoot = CCUserDefault::sharedUserDefault()->getStringForKey(Settings::kSettingsKeyPublicAssetRoot, "");
     if (publicAssetRoot != "") {
         publicAssetRootEditBox_->setText(publicAssetRoot.c_str());
+    }
+    
+    // Consumer Secret
+    float consumerSecretY = visibleOrigin.y + visibleSize.height * 3 / 10;
+    CCLabelTTF* consumerSecretLabel = CCLabelTTF::create("Consumer Secret", "Arial", 12);
+    consumerSecretLabel->setPosition(ccp(50 + labelSize.width, consumerSecretY));
+    consumerSecretLabel->setColor(ccWHITE);
+    consumerSecretLabel->setAnchorPoint(ccp(1, 0.5));
+    addChild(consumerSecretLabel);
+    consumerSecretEditBox_ = CCEditBox::create(editBoxSize, CCScale9Sprite::create("Images/orange_edit.png"));
+    consumerSecretEditBox_->setPosition(ccp(editBoxX, consumerSecretY));
+    consumerSecretEditBox_->setPlaceHolder("Default: empty (no request sign)");
+    consumerSecretEditBox_->setPlaceholderFontColor(ccGRAY);
+    consumerSecretEditBox_->setReturnType(kKeyboardReturnTypeDone);
+    consumerSecretEditBox_->setDelegate(this);
+    addChild(consumerSecretEditBox_);
+    
+    std::string consumerSecret = CCUserDefault::sharedUserDefault()->getStringForKey(Settings::kSettingsKeyConsumerSecret, "");
+    if (consumerSecret != "") {
+        consumerSecretEditBox_->setText(consumerSecret.c_str());
     }
 }
 
@@ -201,6 +226,10 @@ void SettingsLayer::editBoxEditingDidEnd(cocos2d::extension::CCEditBox* editBox)
     }
     if(editBox == publicAssetRootEditBox_){
         CCUserDefault::sharedUserDefault()->setStringForKey(Settings::kSettingsKeyPublicAssetRoot, editBox->getText());
+    }
+    
+    if(editBox == consumerSecretEditBox_){
+        CCUserDefault::sharedUserDefault()->setStringForKey(Settings::kSettingsKeyConsumerSecret, editBox->getText());
     }
     CCUserDefault::sharedUserDefault()->flush();
 }
