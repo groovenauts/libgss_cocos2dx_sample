@@ -27,7 +27,7 @@ enum
     kPlayerTestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createPlayerTest(int nIndex)
 {
@@ -101,6 +101,7 @@ std::string PlayerTest::title()
 
 void PlayerTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextPlayerTest();
     addChild(pLayer);
     
@@ -130,7 +131,7 @@ void PlayerTestJustGet::execute()
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 
@@ -152,7 +153,7 @@ void PlayerTestGetAndUpdate::execute(){
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 
@@ -173,7 +174,7 @@ void PlayerTestGetAndUpdate::OnCompleteToGet(libgss::ActionResponse* response) {
     request->release();
     updateAction->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 

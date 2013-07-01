@@ -34,7 +34,7 @@ enum
     kGameDataTestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createGameDataTest(int nIndex)
 {
@@ -111,6 +111,7 @@ std::string GameDataTest::title()
 
 void GameDataTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextGameDataTest();
     addChild(pLayer);
     
@@ -142,7 +143,7 @@ void GameDataTestJustGet::execute()
     request->release();
     getAction->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 
@@ -165,7 +166,7 @@ void GameDataTestGetAndUpdate::execute(){
     request->release();
     getAction->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 
@@ -187,7 +188,7 @@ void GameDataTestGetAndUpdate::OnCompleteToGet(libgss::ActionResponse* response)
     request->release();
     updateAction->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 
@@ -276,7 +277,7 @@ void ExecuteActionTestUseItem::execute(){
         request->release();
         action->release();
     
-        CCLOG("sent request successfully");
+        CCLOG("sent request");
     }
 
 std::string ExecuteActionTestUseItem::defaultValue() {
