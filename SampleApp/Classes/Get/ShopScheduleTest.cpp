@@ -24,7 +24,7 @@ enum
     kShopScheduleTestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createShopScheduleTest(int nIndex)
 {
@@ -96,6 +96,7 @@ std::string ShopScheduleTest::title()
 
 void ShopScheduleTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextShopScheduleTest();
     addChild(pLayer);
     
@@ -129,7 +130,7 @@ void ShopScheduleTestJustGet::execute()
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 

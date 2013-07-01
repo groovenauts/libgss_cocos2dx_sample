@@ -33,7 +33,7 @@ enum
     kApiErrorTestsCount,
 };
 
-static int testIdx = -1;
+static int testIdx = 0;
 
 BaseNotificationLayer* createApiErrorTest(int nIndex)
 {
@@ -132,6 +132,7 @@ std::string ApiErrorTest::title()
 
 void ApiErrorTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextApiErrorTest();
     addChild(pLayer);
     

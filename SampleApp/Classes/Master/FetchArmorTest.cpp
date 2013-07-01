@@ -33,7 +33,7 @@ enum
     kFetchArmorTestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createFetchArmorTest(int nIndex)
 {
@@ -110,6 +110,7 @@ std::string FetchArmorTest::title()
 
 void FetchArmorTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextFetchArmorTest();
     addChild(pLayer);
     
@@ -137,7 +138,7 @@ void FetchArmorAction::execute()
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
     
 }
 
@@ -246,7 +247,7 @@ void FetchArmorPaginateAction::execute()
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
     
 }
 

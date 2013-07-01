@@ -28,7 +28,7 @@ enum
     kBulkActionTestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createBulkActionTest(int nIndex)
 {
@@ -101,6 +101,7 @@ std::string BulkActionTest::title()
 
 void BulkActionTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextBulkActionTest();
     addChild(pLayer);
     
@@ -148,7 +149,7 @@ void BulkActionTest3Actions::execute(){
     action2->release();
     action3->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -192,7 +193,7 @@ void BulkActionTest2Success1Error::execute(){
     action2->release();
     action3->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 

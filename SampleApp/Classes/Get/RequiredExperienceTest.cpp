@@ -23,7 +23,7 @@ enum
     kRequiredExperienceTestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createRequiredExperienceTest(int nIndex)
 {
@@ -95,6 +95,7 @@ std::string RequiredExperienceTest::title()
 
 void RequiredExperienceTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextRequiredExperienceTest();
     addChild(pLayer);
     
@@ -123,7 +124,7 @@ void RequiredExperienceTestJustGet::execute()
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 

@@ -23,7 +23,7 @@ enum
     kItemOutgoingLogTestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createItemOutgoingLogTest(int nIndex)
 {
@@ -95,6 +95,7 @@ std::string ItemOutgoingLogTest::title()
 
 void ItemOutgoingLogTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextItemOutgoingLogTest();
     addChild(pLayer);
     
@@ -130,7 +131,7 @@ void ItemOutgoingLogTestCreate::execute(){
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 std::string ItemOutgoingLogTestCreate::defaultValue(){

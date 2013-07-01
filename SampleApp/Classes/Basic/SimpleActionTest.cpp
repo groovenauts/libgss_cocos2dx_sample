@@ -24,7 +24,7 @@ enum
     kSimpleActionTestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createSimpleActionTest(int nIndex)
 {
@@ -97,6 +97,7 @@ std::string SimpleActionTest::title()
 
 void SimpleActionTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextSimpleActionTest();
     addChild(pLayer);
     
@@ -128,7 +129,7 @@ void SimpleActionTest1Action::execute(){
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 
@@ -162,7 +163,7 @@ void SimpleActionTestWithNoCallback::execute(){
     
     this->schedule(schedule_selector(SimpleActionTestWithNoCallback::poll));
     
-    CCLOG("sent request successfully");    
+    CCLOG("sent request");    
 }
 
 void SimpleActionTestWithNoCallback::poll(float time){
