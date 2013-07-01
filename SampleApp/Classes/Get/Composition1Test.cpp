@@ -27,7 +27,7 @@ enum
     kComposition1TestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createComposition1Test(int nIndex)
 {
@@ -100,6 +100,7 @@ std::string Composition1Test::title()
 
 void Composition1TestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextComposition1Test();
     addChild(pLayer);
     
@@ -129,7 +130,7 @@ void Composition1TestJustGet::execute()
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 
@@ -166,6 +167,6 @@ void Composition1TestDice1::execute()
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 

@@ -21,12 +21,12 @@
 enum 
 {
     kLoginTestImpl = 0,
-    kLoginTestWithRegister ,
     kLoginTestWithNoCallbackImpl,
+    kLoginTestWithRegister ,
     kLoginTestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createLoginTest(int nIndex)
 {
@@ -121,7 +121,7 @@ void LoginTestImpl::execute()
     libgss::Network::instance()->send(request);
     request->release();
     
-    CCLOG("sent login request successfully");
+    CCLOG("sent login request");
 }
 
 void LoginTestImpl::OnComplete(libgss::LoginResponse *response){
@@ -156,7 +156,7 @@ void LoginTestWithNoCallbackImpl::execute()
     
     this->schedule(schedule_selector(LoginTestWithNoCallbackImpl::poll));
     
-    CCLOG("sent login request successfully");
+    CCLOG("sent login request");
 }
 
 void LoginTestWithNoCallbackImpl::poll(float timer){
@@ -199,7 +199,7 @@ void LoginTestWithRegisterImpl::execute(){
     libgss::Network::instance()->send(request);
     request->release();
     
-    CCLOG("sent login request successfully");
+    CCLOG("sent login request");
 }
 
 void LoginTestWithRegisterImpl::OnComplete(libgss::LoginResponse *response){
@@ -218,6 +218,7 @@ void LoginTestWithRegisterImpl::OnComplete(libgss::LoginResponse *response){
 
 void LoginTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextLoginTest();
     addChild(pLayer);
 

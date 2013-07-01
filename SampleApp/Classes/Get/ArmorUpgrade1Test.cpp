@@ -23,7 +23,7 @@ enum
     kArmorUpgrade1TestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createArmorUpgrade1Test(int nIndex)
 {
@@ -95,6 +95,7 @@ std::string ArmorUpgrade1Test::title()
 
 void ArmorUpgrade1TestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextArmorUpgrade1Test();
     addChild(pLayer);
     
@@ -123,7 +124,7 @@ void ArmorUpgrade1TestJustGet::execute()
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 

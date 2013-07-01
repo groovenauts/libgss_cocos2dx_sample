@@ -27,7 +27,7 @@ enum
     kGreetingHistoryTestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createGreetingHistoryTest(int nIndex)
 {
@@ -100,6 +100,7 @@ std::string GreetingHistoryTest::title()
 
 void GreetingHistoryTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextGreetingHistoryTest();
     addChild(pLayer);
     
@@ -133,7 +134,7 @@ void GreetingHistoryTestCreate::execute(){
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 
@@ -160,7 +161,7 @@ void GreetingHistoryTestFetchAll::execute()
     request->release();
     action->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 

@@ -28,7 +28,7 @@ enum
     kAssetTestsCount,
 }; 
 
-static int testIdx = -1; 
+static int testIdx = 0;
 
 BaseNotificationLayer* createAssetTest(int nIndex)
 {
@@ -101,6 +101,7 @@ std::string AssetTest::title()
 
 void AssetTestScene::runThisTest()
 {
+    testIdx--;
     CCLayer* pLayer = nextAssetTest();
     addChild(pLayer);
     
@@ -123,7 +124,7 @@ void AssetTestBasic::execute(){
     libgss::Network::instance()->send(request);
     request->release();
     
-    CCLOG("sent request successfully");
+    CCLOG("sent request");
 }
 
 void AssetTestBasic::OnComplete(libgss::AssetResponse* response){
@@ -183,7 +184,7 @@ void AssetTestWithNoCallback::execute(){
     
     this->schedule(schedule_selector(AssetTestWithNoCallback::poll));
     
-    CCLOG("sent request successfully");    
+    CCLOG("sent request");    
 }
 
 void AssetTestWithNoCallback::poll(float time){
