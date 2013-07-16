@@ -222,7 +222,8 @@ void PurchaseProcess::transactionRemovedWithError(const std::string& transaction
 
 void PurchaseProcess::login(){
     // Login
-    libgss::LoginRequest* loginRequest = new libgss::LoginRequest(Settings::playerId(), Settings::nickname());
+    libgss::LoginRequest* loginRequest = new libgss::LoginRequest(Settings::playerId(), Settings::nickname(),
+                                                                  Settings::deviceType(), Settings::deviceId());
     loginRequest->setCallback(this, gssLoginResponse(PurchaseProcess::loggedIn));
     libgss::Network::instance()->send(loginRequest);
     loginRequest->release();

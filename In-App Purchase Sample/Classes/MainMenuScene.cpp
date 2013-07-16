@@ -54,7 +54,8 @@ void MainMenu::storeMenuCallback(CCObject* pSender){
         _progressLabel->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width / 2,
                                         CCDirector::sharedDirector()->getWinSize().height / 2));
         this->addChild(_progressLabel);
-        libgss::LoginRequest* loginRequest = new libgss::LoginRequest(Settings::playerId(), Settings::nickname());
+        libgss::LoginRequest* loginRequest = new libgss::LoginRequest(Settings::playerId(), Settings::nickname(),
+                                                                      Settings::deviceType(), Settings::deviceId());
         loginRequest->setCallback(this, gssLoginResponse(MainMenu::loggedIn));
         libgss::Network::instance()->send(loginRequest);
         loginRequest->release();
