@@ -25,3 +25,11 @@ std::string Settings::playerId(){
 std::string Settings::nickname(){
     return "ichiro";
 }
+
+std::string Settings::deviceType(){
+    return "";
+}
+
+std::string Settings::deviceId(){
+    return "";
+}

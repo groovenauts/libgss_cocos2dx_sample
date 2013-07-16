@@ -17,6 +17,8 @@ public:
     
     static std::string playerId();
     static std::string nickname();
+    static std::string deviceType();
+    static std::string deviceId();
 };
 
 #endif /* defined(__In_App_Purchase_Sample__Settings__) */
