@@ -20,8 +20,8 @@ using namespace cocos2d;
 #define kPurchaseProcessingDataKey "processing_data"
 
 #define kPurchaseStatusStarted "purchase_started"
-#define kPurchaseStatusWaitingPurchasing "waiting_purchasing"
-#define kPurchaseStatusPurchasing "purchasing"
+#define kPurchaseStatusPurchasing1 "purchasing1"
+#define kPurchaseStatusPurchasing2 "purchasing2"
 #define kPurchaseStatusPurchased "purchased"
 #define kPurchaseStatusRemovingTransaction "removing_transaction"
 #define kPurchaseStatusTransactionRemoved "transaction_removed"
@@ -125,7 +125,7 @@ void PurchaseProcess::run(const std::string& productId){
 void PurchaseProcess::requestPayment(){
     libgss::JSONObject* data = getProcessingData();
     AppStoreManager::requestPayment(data->get("product_id")->toString());
-    updateProcessingData("status", kPurchaseStatusWaitingPurchasing);
+    updateProcessingData("status", kPurchaseStatusPurchasing2);
 }
 
 bool PurchaseProcess::existsProcessingData(){
@@ -147,10 +147,10 @@ void PurchaseProcess::resume(){
     if (status == kPurchaseStatusStarted) {
         PurchaseProcess::instance()->requestPayment();
     }
-    else if (status == kPurchaseStatusWaitingPurchasing){
-        // do nothing. wait for notification.
+    else if (status == kPurchaseStatusPurchasing1){
+        PurchaseProcess::instance()->requestPayment();
     }
-    else if (status == kPurchaseStatusPurchasing){
+    else if (status == kPurchaseStatusPurchasing2){
         // do nothing. wait for notification.
     }
     else if (status == kPurchaseStatusPurchased){
@@ -166,7 +166,7 @@ void PurchaseProcess::resume(){
 
 void PurchaseProcess::transactionUpdatedToPurchasing(){
     CCLOG("Transaction status updated to 'purchasing'.");
-    updateProcessingData("status", kPurchaseStatusPurchasing);
+    updateProcessingData("status", kPurchaseStatusPurchasing1);
 }
 
 void PurchaseProcess::transactionUpdatedToPurchased(const std::string& transactionId,
