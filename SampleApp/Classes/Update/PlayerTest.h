@@ -22,7 +22,6 @@ public:
 class PlayerTestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
 

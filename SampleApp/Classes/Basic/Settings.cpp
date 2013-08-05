@@ -26,13 +26,16 @@
 
 USING_NS_CC_EXT;
 
-const char* Settings::kDefaultConfigServerUrlBase = "http://localhost/";
+const char* Settings::kDefaultConfigServerUrlBase = "http://localhost:3002";
 const char* Settings::kDefaultClientVersion = "develop";
 const char* Settings::kDefaultDeviceType = "1";
+const char* Settings::kDefaultMaintenanceStatusUrl = "http://localhost:3002/maintenance/";
+const char* Settings::kDefaultPublicAssetRoot = "http://localhost:3000/a/";
 
 const char* Settings::kSettingsKeyConfigServerUrlBase = "jp.groovenauts.libgss.config_server_url_base";
 const char* Settings::kSettingsKeyClientVersion = "jp.groovenauts.libgss.client_version";
 const char* Settings::kSettingsKeyDeviceType = "jp.groovenauts.libgss.device_type";
+const char* Settings::kSettingsKeyMaintenanceStatusUrl = "jp.groovenauts.libgss.maintenance_status_url";
 const char* Settings::kSettingsKeyPublicAssetRoot = "jp.groovenauts.libgss.public_asset_root";
 const char* Settings::kSettingsKeyConsumerSecret = "jp.groovenauts.libgss.consumer_secret";
 
@@ -53,9 +56,16 @@ void Settings::applySettings(){
     appDelegate->willStartLoadApiServerConfig();
     libgss::Network::instance()->initWithConfigServer(urlBase, clientVersion, deviceType, appDelegate);
     
+    std::string maintenanceStatusUrl = CCUserDefault::sharedUserDefault()->getStringForKey(kSettingsKeyMaintenanceStatusUrl, "");
+    if (maintenanceStatusUrl == "") {
+        maintenanceStatusUrl = Settings::kDefaultMaintenanceStatusUrl;
+    }
+    libgss::Network::instance()->setMaintenanceStatusUrl(maintenanceStatusUrl);
+    CCLog("Maintenance status URL: %s", maintenanceStatusUrl.c_str());
+    
     std::string publicAssetRoot = CCUserDefault::sharedUserDefault()->getStringForKey(kSettingsKeyPublicAssetRoot, "");
     if (publicAssetRoot == "") {
-        publicAssetRoot = "http://localhost:3000/a/";
+        publicAssetRoot = kDefaultPublicAssetRoot;
     }
     libgss::Network::instance()->setPublicAssetRoot(publicAssetRoot);
     CCLog("Public asset root: %s", publicAssetRoot.c_str());
@@ -89,15 +99,14 @@ void SettingsLayer::onEnter()
     
     // configサーバーURL設定
     float hostY = visibleOrigin.y + visibleSize.height * 7 / 10;
-    CCLabelTTF* configServerLabel = CCLabelTTF::create("config server", "Arial", 18);
-    configServerLabel->setPosition(ccp(50 + labelSize.width, hostY));
+    CCLabelTTF* configServerLabel = CCLabelTTF::create("Config Server", "Arial", 12);
+    configServerLabel->setPosition(ccp(60 + labelSize.width, hostY));
     configServerLabel->setColor(ccWHITE);
     configServerLabel->setAnchorPoint(ccp(1, 0.5));
     addChild(configServerLabel);
     configServerEditBox_ = CCEditBox::create(editBoxSize, CCScale9Sprite::create("Images/orange_edit.png"));
     configServerEditBox_->setPosition(ccp(editBoxX, hostY));
-    std::string hostPlaceHolder = std::string("Default: ") + Settings::kDefaultConfigServerUrlBase;
-    configServerEditBox_->setPlaceHolder(hostPlaceHolder.c_str());
+    configServerEditBox_->setPlaceHolder(Settings::kDefaultConfigServerUrlBase);
     configServerEditBox_->setPlaceholderFontColor(ccGRAY);
     configServerEditBox_->setReturnType(kKeyboardReturnTypeDone);
     configServerEditBox_->setDelegate(this);
@@ -110,15 +119,14 @@ void SettingsLayer::onEnter()
 
     // クライアントバージョン
     float clientVersionY = visibleOrigin.y + visibleSize.height * 6 / 10;
-    CCLabelTTF* clientVersionLabel = CCLabelTTF::create("client version", "Arial", 18);
-    clientVersionLabel->setPosition(ccp(50 + labelSize.width, clientVersionY));
+    CCLabelTTF* clientVersionLabel = CCLabelTTF::create("Client Version", "Arial", 12);
+    clientVersionLabel->setPosition(ccp(60 + labelSize.width, clientVersionY));
     clientVersionLabel->setColor(ccWHITE);
     clientVersionLabel->setAnchorPoint(ccp(1, 0.5));
     addChild(clientVersionLabel);
     clientVersionEditBox_ = CCEditBox::create(editBoxSize, CCScale9Sprite::create("Images/orange_edit.png"));
     clientVersionEditBox_->setPosition(ccp(editBoxX, clientVersionY));
-    std::string clientPlaceHolder = std::string("Default: ") + Settings::kDefaultClientVersion;
-    clientVersionEditBox_->setPlaceHolder(clientPlaceHolder.c_str());
+    clientVersionEditBox_->setPlaceHolder(Settings::kDefaultClientVersion);
     clientVersionEditBox_->setPlaceholderFontColor(ccGRAY);
     clientVersionEditBox_->setMaxLength(30);
     clientVersionEditBox_->setReturnType(kKeyboardReturnTypeDone);
@@ -133,14 +141,14 @@ void SettingsLayer::onEnter()
 
     // デバイス種別設定
     float deviceTypeY = visibleOrigin.y + visibleSize.height * 5 / 10;
-    CCLabelTTF* sslPortLabel = CCLabelTTF::create("Device Type", "Arial", 18);
-    sslPortLabel->setPosition(ccp(50 + labelSize.width, deviceTypeY));
+    CCLabelTTF* sslPortLabel = CCLabelTTF::create("Device Type", "Arial", 12);
+    sslPortLabel->setPosition(ccp(60 + labelSize.width, deviceTypeY));
     sslPortLabel->setColor(ccWHITE);
     sslPortLabel->setAnchorPoint(ccp(1, 0.5));
     addChild(sslPortLabel);
     deviceTypeEditBox_ = CCEditBox::create(editBoxSize, CCScale9Sprite::create("Images/orange_edit.png"));
     deviceTypeEditBox_->setPosition(ccp(editBoxX, deviceTypeY));
-    deviceTypeEditBox_->setPlaceHolder("Default: 1 (iPhone)");
+    deviceTypeEditBox_->setPlaceHolder(Settings::kDefaultDeviceType);
     deviceTypeEditBox_->setPlaceholderFontColor(ccGRAY);
     deviceTypeEditBox_->setMaxLength(20);
     deviceTypeEditBox_->setReturnType(kKeyboardReturnTypeDone);
@@ -152,16 +160,37 @@ void SettingsLayer::onEnter()
         deviceTypeEditBox_->setText(deviceType.c_str());
     }
 
+    // メンテナンス情報サーバー
+    float maintenanceStatusUrlY = visibleOrigin.y + visibleSize.height * 4 / 10;
+    CCLabelTTF* maintenanceStatusUrlLabel = CCLabelTTF::create("Maintain stat URL", "Arial", 12);
+    maintenanceStatusUrlLabel->setPosition(ccp(60 + labelSize.width, maintenanceStatusUrlY));
+    maintenanceStatusUrlLabel->setColor(ccWHITE);
+    maintenanceStatusUrlLabel->setAnchorPoint(ccp(1, 0.5));
+    addChild(maintenanceStatusUrlLabel);
+    maintenanceStatusUrlEditBox_ = CCEditBox::create(editBoxSize, CCScale9Sprite::create("Images/orange_edit.png"));
+    maintenanceStatusUrlEditBox_->setPosition(ccp(editBoxX, maintenanceStatusUrlY));
+    maintenanceStatusUrlEditBox_->setPlaceHolder(Settings::kDefaultMaintenanceStatusUrl);
+    maintenanceStatusUrlEditBox_->setPlaceholderFontColor(ccGRAY);
+        maintenanceStatusUrlEditBox_->setReturnType(kKeyboardReturnTypeDone);
+    maintenanceStatusUrlEditBox_->setDelegate(this);
+    addChild(maintenanceStatusUrlEditBox_);
+    
+    std::string maintenanceStatusUrl
+    = CCUserDefault::sharedUserDefault()->getStringForKey(Settings::kSettingsKeyMaintenanceStatusUrl, "");
+    if (maintenanceStatusUrl != "") {
+        maintenanceStatusUrlEditBox_->setText(maintenanceStatusUrl.c_str());
+    }
+    
     // Public Asset Root設定
-    float publicAssetRootY = visibleOrigin.y + visibleSize.height * 4 / 10;
+    float publicAssetRootY = visibleOrigin.y + visibleSize.height * 3 / 10;
     CCLabelTTF* publicAssetRootLabel = CCLabelTTF::create("Public Asset Root", "Arial", 12);
-    publicAssetRootLabel->setPosition(ccp(50 + labelSize.width, publicAssetRootY));
+    publicAssetRootLabel->setPosition(ccp(60 + labelSize.width, publicAssetRootY));
     publicAssetRootLabel->setColor(ccWHITE);
     publicAssetRootLabel->setAnchorPoint(ccp(1, 0.5));
     addChild(publicAssetRootLabel);
     publicAssetRootEditBox_ = CCEditBox::create(editBoxSize, CCScale9Sprite::create("Images/orange_edit.png"));
     publicAssetRootEditBox_->setPosition(ccp(editBoxX, publicAssetRootY));
-    publicAssetRootEditBox_->setPlaceHolder("Default: http://localhost:3000/a/");
+    publicAssetRootEditBox_->setPlaceHolder(Settings::kDefaultPublicAssetRoot);
     publicAssetRootEditBox_->setPlaceholderFontColor(ccGRAY);
     publicAssetRootEditBox_->setMaxLength(8);
     publicAssetRootEditBox_->setReturnType(kKeyboardReturnTypeDone);
@@ -174,9 +203,9 @@ void SettingsLayer::onEnter()
     }
     
     // Consumer Secret
-    float consumerSecretY = visibleOrigin.y + visibleSize.height * 3 / 10;
+    float consumerSecretY = visibleOrigin.y + visibleSize.height * 2 / 10;
     CCLabelTTF* consumerSecretLabel = CCLabelTTF::create("Consumer Secret", "Arial", 12);
-    consumerSecretLabel->setPosition(ccp(50 + labelSize.width, consumerSecretY));
+    consumerSecretLabel->setPosition(ccp(60 + labelSize.width, consumerSecretY));
     consumerSecretLabel->setColor(ccWHITE);
     consumerSecretLabel->setAnchorPoint(ccp(1, 0.5));
     addChild(consumerSecretLabel);
@@ -196,7 +225,7 @@ void SettingsLayer::onEnter()
     if (message_ != "") {
         messageLabel_ = CCLabelTTF::create(message_.c_str(), "Arial", 18);
         addChild(messageLabel_, 1);
-        messageLabel_->setPosition(ccp(s.width / 2, 50));
+        messageLabel_->setPosition(ccp(s.width / 2, 25));
         messageLabel_->setColor(ccRED);
     }
 }
@@ -218,10 +247,13 @@ void SettingsLayer::editBoxEditingDidEnd(cocos2d::extension::CCEditBox* editBox)
     else if(editBox == clientVersionEditBox_){
         key = Settings::kSettingsKeyClientVersion;
     }
-    if(editBox == publicAssetRootEditBox_){
+    else if (editBox == maintenanceStatusUrlEditBox_){
+        key = Settings::kSettingsKeyMaintenanceStatusUrl;
+    }
+    else if(editBox == publicAssetRootEditBox_){
         key = Settings::kSettingsKeyPublicAssetRoot;
     }
-    if(editBox == consumerSecretEditBox_){
+    else if(editBox == consumerSecretEditBox_){
         key = Settings::kSettingsKeyConsumerSecret;
     }
     

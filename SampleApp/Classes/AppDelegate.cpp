@@ -102,7 +102,9 @@ void AppDelegate::didLoadApiServerConfigWithError(int code, const std::string& m
 
 void AppDelegate::didLoadApiServerConfigWithSuccess()
 {
-    CCLOG("loaded config.");
+    CCLOG("loaded config.\nHTTP URL base : %s\nHTTPS URL base: %s",
+          libgss::Network::instance()->apiServerHttpUrlBase().c_str(),
+          libgss::Network::instance()->apiServerSslUrlBase().c_str());
 
     CCDirector::sharedDirector()->popScene();
 }

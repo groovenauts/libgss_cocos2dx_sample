@@ -53,6 +53,7 @@
 		A9B37E49170EE7BA0046E784 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B37E48170EE7BA0046E784 /* AppDelegate.cpp */; };
 		A9BAAAA817ABC430008727B7 /* LoadingModal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BAAAA617ABC430008727B7 /* LoadingModal.cpp */; };
 		A9BAAAAB17AF65E4008727B7 /* libGSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9BAAAAA17AF65E4008727B7 /* libGSS.framework */; };
+		A9BAAAAF17AFB22F008727B7 /* MaintenanceTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BAAAAD17AFB22B008727B7 /* MaintenanceTest.cpp */; };
 		A9BBEBEA174C9CAB007C9E17 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = A9BBE906174C9CA9007C9E17 /* chipmunk.c */; };
 		A9BBEBEB174C9CAB007C9E17 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = A9BBE907174C9CA9007C9E17 /* CMakeLists.txt */; };
 		A9BBEBEC174C9CAB007C9E17 /* cpConstraint.c in Sources */ = {isa = PBXBuildFile; fileRef = A9BBE909174C9CA9007C9E17 /* cpConstraint.c */; };
@@ -368,6 +369,8 @@
 		A9BAAAA617ABC430008727B7 /* LoadingModal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = LoadingModal.cpp; path = Classes/LoadingModal.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		A9BAAAA717ABC430008727B7 /* LoadingModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = LoadingModal.h; path = Classes/LoadingModal.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A9BAAAAA17AF65E4008727B7 /* libGSS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libGSS.framework; sourceTree = "<group>"; };
+		A9BAAAAD17AFB22B008727B7 /* MaintenanceTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaintenanceTest.cpp; sourceTree = "<group>"; };
+		A9BAAAAE17AFB22D008727B7 /* MaintenanceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaintenanceTest.h; sourceTree = "<group>"; };
 		A9BBE8E9174C9CA9007C9E17 /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
 		A9BBE8EA174C9CA9007C9E17 /* chipmunk_ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_ffi.h; sourceTree = "<group>"; };
 		A9BBE8EB174C9CA9007C9E17 /* chipmunk_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_private.h; sourceTree = "<group>"; };
@@ -950,6 +953,8 @@
 				6767B36C1743841D0058ED07 /* BulkActionTest.h */,
 				A920FA5F1758854800F54B9C /* ApiErrorTest.cpp */,
 				A920FA601758854800F54B9C /* ApiErrorTest.h */,
+				A9BAAAAD17AFB22B008727B7 /* MaintenanceTest.cpp */,
+				A9BAAAAE17AFB22D008727B7 /* MaintenanceTest.h */,
 			);
 			name = Basic;
 			path = Classes/Basic;
@@ -2469,6 +2474,7 @@
 				A920FA611758854800F54B9C /* ApiErrorTest.cpp in Sources */,
 				A925CCC6175E056F001593E1 /* AssetTest.cpp in Sources */,
 				A9BAAAA817ABC430008727B7 /* LoadingModal.cpp in Sources */,
+				A9BAAAAF17AFB22F008727B7 /* MaintenanceTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,6 +17,8 @@ static TestScene* CreateTestScene(int nIdx)
     {
     case SETTINGS:
         pScene = new SettingsScene(); break;
+    case TEST_MAINTENANCE_STATUS:
+        pScene = new MaintenanceTestScene(); break;
     case TEST_LOGIN:
         pScene = new LoginTestScene(); break;
     case TEST_SIMPLE_ACTION:

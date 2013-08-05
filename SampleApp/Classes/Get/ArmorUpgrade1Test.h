@@ -22,7 +22,6 @@ public:
 class ArmorUpgrade1TestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
 

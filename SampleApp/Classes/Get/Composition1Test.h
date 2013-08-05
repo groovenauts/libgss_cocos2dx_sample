@@ -22,7 +22,6 @@ public:
 class Composition1TestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
 

@@ -22,7 +22,6 @@ public:
 class RequiredExperienceTestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
 

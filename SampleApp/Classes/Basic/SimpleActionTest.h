@@ -23,7 +23,6 @@ public:
 class SimpleActionTestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
 

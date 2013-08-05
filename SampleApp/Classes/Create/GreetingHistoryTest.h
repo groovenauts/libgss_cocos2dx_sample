@@ -22,7 +22,6 @@ public:
 class GreetingHistoryTestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
 

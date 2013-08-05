@@ -22,7 +22,6 @@ public:
 class ItemOutgoingLogTestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
 

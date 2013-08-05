@@ -153,7 +153,7 @@ void ApiErrorTestInvalidURL::execute(){
     CCLOG("ApiErrorTestInvalidURL::execute");
     
     // set non-valid URL temporary.
-    libgss::Network::instance()->InitWithApiServerUrlBase("http://noexists-host.invalid",
+    libgss::Network::instance()->initWithApiServerUrlBase("http://noexists-host.invalid",
                                                           "https://noexists-host.invalid",
                                                           libgss::Network::instance()->clientVersion(),
                                                           libgss::Network::instance()->deviceType());

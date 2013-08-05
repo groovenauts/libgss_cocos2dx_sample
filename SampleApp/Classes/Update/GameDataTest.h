@@ -23,7 +23,6 @@ public:
 class GameDataTestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
 
