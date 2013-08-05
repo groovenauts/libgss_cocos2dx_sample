@@ -6,6 +6,7 @@
 #include "Basic/SimpleActionTest.h"
 #include "Basic/BulkActionTest.h"
 #include "Basic/ApiErrorTest.h"
+#include "Basic/MaintenanceTest.h"
 
 #include "Master/FetchArmorTest.h"
 
@@ -25,6 +26,7 @@
 enum
 {
     SETTINGS,
+    TEST_MAINTENANCE_STATUS,
     TEST_LOGIN,
     TEST_SIMPLE_ACTION,
     TEST_BULK_ACTION,
@@ -45,6 +47,7 @@ enum
 
 const std::string g_aTestNames[TESTS_COUNT] = {
     "Settings",
+    "Maintenance Status",
     "Login",
     "Simple Action",
     "Bulk Action",

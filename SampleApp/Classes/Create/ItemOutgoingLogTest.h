@@ -22,7 +22,6 @@ public:
 class ItemOutgoingLogTestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
 
@@ -33,7 +32,15 @@ public:
     std::string subtitle();
     virtual void execute();
     void OnComplete(libgss::ActionResponse* response) {
-        log(response->outputs()->toString());
+        if (response->success()) {
+            CCLOG("%s", response->outputs()->toString().c_str());
+        }
+        else if(response->existsNewerVersionClient()){
+            CCLOG("New version client has released.");
+        }
+        else{
+            CCLOG("Error has occured.");
+        }
     }
 protected:
     virtual std::string defaultValue();

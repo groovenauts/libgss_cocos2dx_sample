@@ -179,7 +179,15 @@ void SimpleActionTestWithNoCallback::poll(float time){
     
     this->unschedule(schedule_selector(SimpleActionTestWithNoCallback::poll));
     
-    CCLOG("%s", response->outputs()->toString().c_str());
+    if (response->success()) {
+        CCLOG("%s", response->outputs()->toString().c_str());
+    }
+    else if(response->existsNewerVersionClient()){
+        CCLOG("New version client has released.");
+    }
+    else{
+        CCLOG("Error has occured.");
+    }
     
     request_->release();
 }
