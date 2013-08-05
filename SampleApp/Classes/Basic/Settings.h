@@ -24,19 +24,25 @@ class Settings{
 public:
     static void applySettings();
     
-    static const char* kDefaultHost;
-    static const int kInvalidPort;
-    static const char* kSettingsKeyHost;
-    static const char* kSettingsKeyHttpPort;
-    static const char* kSettingsKeySslPort;
+    static const char* kDefaultConfigServerUrlBase;
+    static const char* kDefaultClientVersion;
+    static const char* kDefaultDeviceType;
+    
+    static const char* kSettingsKeyConfigServerUrlBase;
+    static const char* kSettingsKeyClientVersion;
+    static const char* kSettingsKeyDeviceType;
     static const char* kSettingsKeyPublicAssetRoot;
     static const char* kSettingsKeyConsumerSecret;
 };
 
 class SettingsLayer : public CCLayer, public cocos2d::extension::CCEditBoxDelegate
 {
+    cocos2d::CCLabelTTF *messageLabel_;
+    std::string message_;
+    
 public:
     SettingsLayer(){};
+    SettingsLayer(std::string message):message_(message){}
     ~SettingsLayer(){};
     
     void onEnter();
@@ -47,17 +53,21 @@ public:
     void editBoxTextChanged(cocos2d::extension::CCEditBox* editBox, const std::string& text);
     void editBoxReturn(cocos2d::extension::CCEditBox* editBox);
 private:
-    cocos2d::extension::CCEditBox* hostEditBox_;
-    cocos2d::extension::CCEditBox* httpPortEditBox_;
-    cocos2d::extension::CCEditBox* sslPortEditBox_;
+    cocos2d::extension::CCEditBox* configServerEditBox_;
+    cocos2d::extension::CCEditBox* clientVersionEditBox_;
+    cocos2d::extension::CCEditBox* deviceTypeEditBox_;
     cocos2d::extension::CCEditBox* publicAssetRootEditBox_;
     cocos2d::extension::CCEditBox* consumerSecretEditBox_;
 };
 
 
 class SettingsScene : public TestScene {
+    std::string message_;
     
 public:
+    SettingsScene():TestScene(){}
+    SettingsScene(std::string message):TestScene(), message_(message){}
+    
     void runThisTest();
     void MainMenuCallback(CCObject* pSender);
 };

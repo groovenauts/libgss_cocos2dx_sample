@@ -22,7 +22,6 @@ public:
 class BulkActionTestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
 

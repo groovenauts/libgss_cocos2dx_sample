@@ -11,6 +11,8 @@
 #include "cocos2d.h"
 #include "controller.h"
 #include "Settings.h"
+#include "LoadingModal.h"
+
 
 #include <libGSS/libGSS.h>
 
@@ -30,8 +32,6 @@ bool AppDelegate::applicationDidFinishLaunching()
     // initialize director
     CCDirector *pDirector = CCDirector::sharedDirector();
     pDirector->setOpenGLView(CCEGLView::sharedOpenGLView());
-    
-    Settings::applySettings();
     
     CCSize screenSize = CCEGLView::sharedOpenGLView()->getFrameSize();
     
@@ -61,6 +61,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     pScene->addChild(pLayer);
     pDirector->runWithScene(pScene);
     
+    Settings::applySettings();
 
     return true;
 }
@@ -81,4 +82,31 @@ void AppDelegate::applicationWillEnterForeground()
     
     // if you use SimpleAudioEngine, it must resume here
     // SimpleAudioEngine::sharedEngine()->resumeBackgroundMusic();
+}
+
+void AppDelegate::willStartLoadApiServerConfig()
+{
+    CCDirector *pDirector = CCDirector::sharedDirector();
+    
+    pDirector->pushScene(LoadingModal::create("Loading config..."));
+}
+
+void AppDelegate::didLoadApiServerConfigWithError(int code, const std::string& message)
+{
+    CCLOG("failed to load config. showing settings scene. code: %d message:%s", code, message.c_str());
+    
+    CCDirector *pDirector = CCDirector::sharedDirector();
+    pDirector->popScene();
+    
+    SettingsScene* scene = new SettingsScene("Cannot connect config server.");
+    scene->runThisTest();
+    scene->autorelease();
+}
+
+void AppDelegate::didLoadApiServerConfigWithSuccess()
+{
+    CCLOG("loaded config.");
+
+    CCDirector *pDirector = CCDirector::sharedDirector();
+    pDirector->popScene();
 }
