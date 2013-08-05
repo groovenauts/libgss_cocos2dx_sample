@@ -120,7 +120,7 @@ void SettingsLayer::onEnter()
     std::string clientPlaceHolder = std::string("Default: ") + Settings::kDefaultClientVersion;
     clientVersionEditBox_->setPlaceHolder(clientPlaceHolder.c_str());
     clientVersionEditBox_->setPlaceholderFontColor(ccGRAY);
-    clientVersionEditBox_->setMaxLength(8);
+    clientVersionEditBox_->setMaxLength(30);
     clientVersionEditBox_->setReturnType(kKeyboardReturnTypeDone);
     clientVersionEditBox_->setDelegate(this);
     addChild(clientVersionEditBox_);
@@ -142,7 +142,7 @@ void SettingsLayer::onEnter()
     deviceTypeEditBox_->setPosition(ccp(editBoxX, deviceTypeY));
     deviceTypeEditBox_->setPlaceHolder("Default: 1 (iPhone)");
     deviceTypeEditBox_->setPlaceholderFontColor(ccGRAY);
-    deviceTypeEditBox_->setMaxLength(8);
+    deviceTypeEditBox_->setMaxLength(20);
     deviceTypeEditBox_->setReturnType(kKeyboardReturnTypeDone);
     deviceTypeEditBox_->setDelegate(this);
     addChild(deviceTypeEditBox_);

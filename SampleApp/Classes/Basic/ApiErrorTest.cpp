@@ -80,6 +80,10 @@ void showError(libgss::Response* response)
     if (response->success()) {
         return;
     }
+    else if(response->existsNewerVersionClient()){
+        CCLOG("New version client has released.");
+        return;
+    }
     
     if (response->code() >= 400) {
         stringstream ss;

@@ -171,7 +171,17 @@ void GameDataTestGetAndUpdate::execute(){
 
 
 void GameDataTestGetAndUpdate::OnCompleteToGet(libgss::ActionResponse* response) {
-    log(response->outputs()->toString());
+    if (response->success()) {
+        CCLOG("%s", response->outputs()->toString().c_str());
+    }
+    else if(response->existsNewerVersionClient()){
+        CCLOG("New version client has released.");
+        return;
+    }
+    else{
+        CCLOG("Error has occured.");
+        return;
+    }
 
     CCLOG("GameDataTestDecrementHP::update");
     CCLOG("now sending request with update action.");

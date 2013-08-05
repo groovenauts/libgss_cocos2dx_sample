@@ -128,6 +128,9 @@ void LoginTestImpl::OnComplete(libgss::LoginResponse *response){
     if (response->success()) {
         CCLOG("Login success! player id is: %s", libgss::Network::instance()->playerId().c_str());
     }
+    else if(response->existsNewerVersionClient()){
+        CCLOG("New version client has released.");
+    }
     else{
         CCLOG("Login failure! error code: %d", response->code());
     }
@@ -172,6 +175,9 @@ void LoginTestWithNoCallbackImpl::poll(float timer){
     if (response->success()) {
         CCLOG("Login success! player id is: %s", libgss::Network::instance()->playerId().c_str());
     }
+    else if(response->existsNewerVersionClient()){
+        CCLOG("New version client has released.");
+    }
     else{
         CCLOG("Login failure! error code: %d", response->code());
     }
@@ -205,6 +211,9 @@ void LoginTestWithRegisterImpl::execute(){
 void LoginTestWithRegisterImpl::OnComplete(libgss::LoginResponse *response){
     if (response->success()) {
         CCLOG("Login success! player id is: %s", libgss::Network::instance()->playerId().c_str());
+    }
+    else if(response->existsNewerVersionClient()){
+        CCLOG("New version client has released.");
     }
     else{
         CCLOG("Login failure! error code: %d", response->code());

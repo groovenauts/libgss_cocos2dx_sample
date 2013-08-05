@@ -21,14 +21,6 @@ public:
     virtual std::string subtitle() = 0;
     
     virtual void execute(){};
-    
-protected:
-    void log(std::string s) {
-        int size = s.length() + 1;
-        char* buf = new char[size];
-        memcpy(buf, s.c_str(), size);
-        CCLOG(buf);
-    }
 };
 
 

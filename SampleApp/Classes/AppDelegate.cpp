@@ -86,19 +86,16 @@ void AppDelegate::applicationWillEnterForeground()
 
 void AppDelegate::willStartLoadApiServerConfig()
 {
-    CCDirector *pDirector = CCDirector::sharedDirector();
-    
-    pDirector->pushScene(LoadingModal::create("Loading config..."));
+    CCDirector::sharedDirector()->pushScene(LoadingModal::create("Loading config..."));
 }
 
 void AppDelegate::didLoadApiServerConfigWithError(int code, const std::string& message)
 {
     CCLOG("failed to load config. showing settings scene. code: %d message:%s", code, message.c_str());
     
-    CCDirector *pDirector = CCDirector::sharedDirector();
-    pDirector->popScene();
+    CCDirector::sharedDirector()->popScene();
     
-    SettingsScene* scene = new SettingsScene("Cannot connect config server.");
+    SettingsScene* scene = new SettingsScene("Cannot load config from server.");
     scene->runThisTest();
     scene->autorelease();
 }
@@ -107,6 +104,5 @@ void AppDelegate::didLoadApiServerConfigWithSuccess()
 {
     CCLOG("loaded config.");
 
-    CCDirector *pDirector = CCDirector::sharedDirector();
-    pDirector->popScene();
+    CCDirector::sharedDirector()->popScene();
 }
