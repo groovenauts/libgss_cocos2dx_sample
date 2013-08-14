@@ -143,11 +143,15 @@ void FetchArmorAction::execute()
 }
 
 void FetchArmorAction::OnComplete(libgss::ActionResponse* response){
-    std::string s = response->outputs()->toString();
-    int size = s.length() + 1;
-    char* buf = new char[size];
-    memcpy(buf, s.c_str(), size);
-    CCLOG(buf);
+    if (response->success()) {
+        CCLOG("%s", response->outputs()->toString().c_str());
+    }
+    else if(response->existsNewerVersionClient()){
+        CCLOG("New version client has released.");
+    }
+    else{
+        CCLOG("Error has occured.");
+    }
 }
 
 
@@ -252,11 +256,15 @@ void FetchArmorPaginateAction::execute()
 }
 
 void FetchArmorPaginateAction::OnComplete(libgss::ActionResponse* response){
-    std::string s = response->outputs()->toString();
-    int size = s.length() + 1;
-    char* buf = new char[size];
-    memcpy(buf, s.c_str(), size);
-    CCLOG(buf);
+    if (response->success()) {
+        CCLOG("%s", response->outputs()->toString().c_str());
+    }
+    else if(response->existsNewerVersionClient()){
+        CCLOG("New version client has released.");
+    }
+    else{
+        CCLOG("Error has occured.");
+    }
 }
 
 std::string FetchArmorPaginateAction::defaultValue() {

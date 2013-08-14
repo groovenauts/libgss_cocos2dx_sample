@@ -10,13 +10,14 @@
 #define  _APP_DELEGATE_H_
 
 #include "CCApplication.h"
+#include <libGSS/libGSS.h>
 
 /**
 @brief    The cocos2d Application.
 
 The reason to implement with private inheritance is to hide some interface details of CCDirector.
 */
-class  AppDelegate : private cocos2d::CCApplication
+class  AppDelegate : private cocos2d::CCApplication, public libgss::LoadApiServerConfigDelegate
 {
 public:
     AppDelegate();
@@ -40,6 +41,17 @@ public:
     @param  the pointer of the application instance
     */
     virtual void applicationWillEnterForeground();
+    
+    /**
+     @brief The function is called when the application settings are to be loaded from config server.
+     */
+    void willStartLoadApiServerConfig();
+    
+    // override
+    void didLoadApiServerConfigWithError(int code, const std::string& message);
+    
+    // override
+    void didLoadApiServerConfigWithSuccess();
 };
 
 #endif // _APP_DELEGATE_H_

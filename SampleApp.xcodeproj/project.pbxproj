@@ -51,7 +51,9 @@
 		A9B37BD9170EE7B40046E784 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A9B37BD8170EE7B40046E784 /* RootViewController.mm */; };
 		A9B37BDB170EE7B40046E784 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B37BDA170EE7B40046E784 /* main.m */; };
 		A9B37E49170EE7BA0046E784 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9B37E48170EE7BA0046E784 /* AppDelegate.cpp */; };
-		A9BBE8E3174C9B49007C9E17 /* libGSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9BBE8E2174C9B49007C9E17 /* libGSS.framework */; };
+		A9BAAAA817ABC430008727B7 /* LoadingModal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BAAAA617ABC430008727B7 /* LoadingModal.cpp */; };
+		A9BAAAAB17AF65E4008727B7 /* libGSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9BAAAAA17AF65E4008727B7 /* libGSS.framework */; };
+		A9BAAAAF17AFB22F008727B7 /* MaintenanceTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BAAAAD17AFB22B008727B7 /* MaintenanceTest.cpp */; };
 		A9BBEBEA174C9CAB007C9E17 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = A9BBE906174C9CA9007C9E17 /* chipmunk.c */; };
 		A9BBEBEB174C9CAB007C9E17 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = A9BBE907174C9CA9007C9E17 /* CMakeLists.txt */; };
 		A9BBEBEC174C9CAB007C9E17 /* cpConstraint.c in Sources */ = {isa = PBXBuildFile; fileRef = A9BBE909174C9CA9007C9E17 /* cpConstraint.c */; };
@@ -363,8 +365,12 @@
 		A9B37BDA170EE7B40046E784 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ios/main.m; sourceTree = "<group>"; };
 		A9B37E45170EE7BA0046E784 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		A9B37E47170EE7BA0046E784 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
-		A9B37E48170EE7BA0046E784 /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = Classes/AppDelegate.cpp; sourceTree = "<group>"; };
-		A9BBE8E2174C9B49007C9E17 /* libGSS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libGSS.framework; sourceTree = "<group>"; };
+		A9B37E48170EE7BA0046E784 /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = AppDelegate.cpp; path = Classes/AppDelegate.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		A9BAAAA617ABC430008727B7 /* LoadingModal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = LoadingModal.cpp; path = Classes/LoadingModal.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		A9BAAAA717ABC430008727B7 /* LoadingModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = LoadingModal.h; path = Classes/LoadingModal.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A9BAAAAA17AF65E4008727B7 /* libGSS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libGSS.framework; sourceTree = "<group>"; };
+		A9BAAAAD17AFB22B008727B7 /* MaintenanceTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaintenanceTest.cpp; sourceTree = "<group>"; };
+		A9BAAAAE17AFB22D008727B7 /* MaintenanceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaintenanceTest.h; sourceTree = "<group>"; };
 		A9BBE8E9174C9CA9007C9E17 /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
 		A9BBE8EA174C9CA9007C9E17 /* chipmunk_ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_ffi.h; sourceTree = "<group>"; };
 		A9BBE8EB174C9CA9007C9E17 /* chipmunk_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_private.h; sourceTree = "<group>"; };
@@ -901,7 +907,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9BBE8E3174C9B49007C9E17 /* libGSS.framework in Frameworks */,
+				A9BAAAAB17AF65E4008727B7 /* libGSS.framework in Frameworks */,
 				A9B37BAB170EE7B40046E784 /* QuartzCore.framework in Frameworks */,
 				A9B37BAD170EE7B40046E784 /* OpenGLES.framework in Frameworks */,
 				A9B37BAF170EE7B40046E784 /* OpenAL.framework in Frameworks */,
@@ -947,6 +953,8 @@
 				6767B36C1743841D0058ED07 /* BulkActionTest.h */,
 				A920FA5F1758854800F54B9C /* ApiErrorTest.cpp */,
 				A920FA601758854800F54B9C /* ApiErrorTest.h */,
+				A9BAAAAD17AFB22B008727B7 /* MaintenanceTest.cpp */,
+				A9BAAAAE17AFB22D008727B7 /* MaintenanceTest.h */,
 			);
 			name = Basic;
 			path = Classes/Basic;
@@ -1017,7 +1025,7 @@
 			isa = PBXGroup;
 			children = (
 				A9BBECD9174CA4BF007C9E17 /* libsqlite3.dylib */,
-				A9BBE8E2174C9B49007C9E17 /* libGSS.framework */,
+				A9BAAAAA17AF65E4008727B7 /* libGSS.framework */,
 				A9B37BAA170EE7B40046E784 /* QuartzCore.framework */,
 				A9B37BAC170EE7B40046E784 /* OpenGLES.framework */,
 				A9B37BAE170EE7B40046E784 /* OpenAL.framework */,
@@ -1104,6 +1112,8 @@
 				679FE36B173CDE8A00983108 /* GroundLayer.h */,
 				67D0FBC51731082500F2D2B0 /* VisibleRect.cpp */,
 				67D0FBC61731082500F2D2B0 /* VisibleRect.h */,
+				A9BAAAA617ABC430008727B7 /* LoadingModal.cpp */,
+				A9BAAAA717ABC430008727B7 /* LoadingModal.h */,
 				A9B37E47170EE7BA0046E784 /* AppDelegate.h */,
 				A9B37E48170EE7BA0046E784 /* AppDelegate.cpp */,
 			);
@@ -2463,6 +2473,8 @@
 				A9A9B76017531A1A00655C76 /* Settings.cpp in Sources */,
 				A920FA611758854800F54B9C /* ApiErrorTest.cpp in Sources */,
 				A925CCC6175E056F001593E1 /* AssetTest.cpp in Sources */,
+				A9BAAAA817ABC430008727B7 /* LoadingModal.cpp in Sources */,
+				A9BAAAAF17AFB22F008727B7 /* MaintenanceTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

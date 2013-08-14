@@ -23,7 +23,6 @@ public:
 class GameDataTestScene : public TestScene
 {
 public:
-    std::string subtitle();
     virtual void runThisTest();
 };
 
@@ -35,7 +34,15 @@ public:
     std::string subtitle();
     virtual void execute();
     void OnComplete(libgss::ActionResponse* response) {
-        log(response->outputs()->toString());
+        if (response->success()) {
+            CCLOG("%s", response->outputs()->toString().c_str());
+        }
+        else if(response->existsNewerVersionClient()){
+            CCLOG("New version client has released.");
+        }
+        else{
+            CCLOG("Error has occured.");
+        }
     }
 };
 
@@ -49,7 +56,15 @@ public:
     
     virtual void update(libgss::JSONObject* gameData){};
     void OnCompleteToUpdate(libgss::ActionResponse* response){
-        log(response->outputs()->toString());
+        if (response->success()) {
+            CCLOG("%s", response->outputs()->toString().c_str());
+        }
+        else if(response->existsNewerVersionClient()){
+            CCLOG("New version client has released.");
+        }
+        else{
+            CCLOG("Error has occured.");
+        }
     }
 };
 
@@ -90,7 +105,15 @@ public:
     std::string subtitle();
     virtual void execute();
     void OnComplete(libgss::ActionResponse* response) {
-        log(response->outputs()->toString());
+        if (response->success()) {
+            CCLOG("%s", response->outputs()->toString().c_str());
+        }
+        else if(response->existsNewerVersionClient()){
+            CCLOG("New version client has released.");
+        }
+        else{
+            CCLOG("Error has occured.");
+        }
     }
 protected:
     std::string defaultValue();

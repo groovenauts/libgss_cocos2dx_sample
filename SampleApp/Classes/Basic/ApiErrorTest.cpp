@@ -80,6 +80,10 @@ void showError(libgss::Response* response)
     if (response->success()) {
         return;
     }
+    else if(response->existsNewerVersionClient()){
+        CCLOG("New version client has released.");
+        return;
+    }
     
     if (response->code() >= 400) {
         stringstream ss;
@@ -105,8 +109,6 @@ void showError(libgss::Response* response)
 
 void ApiErrorTest::nextCallback(CCObject* pSender)
 {
-    CCLOG("root URL: %s", libgss::Network::instance()->sslRootUrl().c_str());
-    
     CCScene* s = new ApiErrorTestScene();
     s->addChild( nextApiErrorTest() );
     CCDirector::sharedDirector()->replaceScene(s);
@@ -150,7 +152,11 @@ std::string ApiErrorTestInvalidURL::subtitle(){
 void ApiErrorTestInvalidURL::execute(){
     CCLOG("ApiErrorTestInvalidURL::execute");
     
-    libgss::Network::instance()->setHost("noexists-host.invalid");
+    // set non-valid URL temporary.
+    libgss::Network::instance()->initWithApiServerUrlBase("http://noexists-host.invalid",
+                                                          "https://noexists-host.invalid",
+                                                          libgss::Network::instance()->clientVersion(),
+                                                          libgss::Network::instance()->deviceType());
     
     CCLOG("now sending request.");
     
@@ -170,6 +176,8 @@ void ApiErrorTestInvalidURL::execute(){
 
 void ApiErrorTestInvalidURL::OnComplete(libgss::ActionResponse* response){
     showError(response);
+    
+    // restore settings
     Settings::applySettings();
 }
 
