@@ -27,13 +27,11 @@ public:
     static const char* kDefaultConfigServerUrlBase;
     static const char* kDefaultClientVersion;
     static const char* kDefaultDeviceType;
-    static const char* kDefaultMaintenanceStatusUrl;
     static const char* kDefaultPublicAssetRoot;
     
     static const char* kSettingsKeyConfigServerUrlBase;
     static const char* kSettingsKeyClientVersion;
     static const char* kSettingsKeyDeviceType;
-    static const char* kSettingsKeyMaintenanceStatusUrl;
     static const char* kSettingsKeyPublicAssetRoot;
     static const char* kSettingsKeyConsumerSecret;
 };
@@ -59,7 +57,6 @@ private:
     cocos2d::extension::CCEditBox* configServerEditBox_;
     cocos2d::extension::CCEditBox* clientVersionEditBox_;
     cocos2d::extension::CCEditBox* deviceTypeEditBox_;
-    cocos2d::extension::CCEditBox* maintenanceStatusUrlEditBox_;
     cocos2d::extension::CCEditBox* publicAssetRootEditBox_;
     cocos2d::extension::CCEditBox* consumerSecretEditBox_;
 };
