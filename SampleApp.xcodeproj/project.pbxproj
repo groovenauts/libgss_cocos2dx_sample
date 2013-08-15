@@ -54,6 +54,7 @@
 		A9BAAAA817ABC430008727B7 /* LoadingModal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BAAAA617ABC430008727B7 /* LoadingModal.cpp */; };
 		A9BAAAAB17AF65E4008727B7 /* libGSS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9BAAAAA17AF65E4008727B7 /* libGSS.framework */; };
 		A9BAAAAF17AFB22F008727B7 /* MaintenanceTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BAAAAD17AFB22B008727B7 /* MaintenanceTest.cpp */; };
+		A9BAAAC417B4FF5F008727B7 /* MasterDiffsTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BAAAC217B4FF5E008727B7 /* MasterDiffsTest.cpp */; };
 		A9BBEBEA174C9CAB007C9E17 /* chipmunk.c in Sources */ = {isa = PBXBuildFile; fileRef = A9BBE906174C9CA9007C9E17 /* chipmunk.c */; };
 		A9BBEBEB174C9CAB007C9E17 /* CMakeLists.txt in Resources */ = {isa = PBXBuildFile; fileRef = A9BBE907174C9CA9007C9E17 /* CMakeLists.txt */; };
 		A9BBEBEC174C9CAB007C9E17 /* cpConstraint.c in Sources */ = {isa = PBXBuildFile; fileRef = A9BBE909174C9CA9007C9E17 /* cpConstraint.c */; };
@@ -371,6 +372,8 @@
 		A9BAAAAA17AF65E4008727B7 /* libGSS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libGSS.framework; sourceTree = "<group>"; };
 		A9BAAAAD17AFB22B008727B7 /* MaintenanceTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaintenanceTest.cpp; sourceTree = "<group>"; };
 		A9BAAAAE17AFB22D008727B7 /* MaintenanceTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaintenanceTest.h; sourceTree = "<group>"; };
+		A9BAAAC217B4FF5E008727B7 /* MasterDiffsTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MasterDiffsTest.cpp; sourceTree = "<group>"; };
+		A9BAAAC317B4FF5E008727B7 /* MasterDiffsTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterDiffsTest.h; sourceTree = "<group>"; };
 		A9BBE8E9174C9CA9007C9E17 /* chipmunk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk.h; sourceTree = "<group>"; };
 		A9BBE8EA174C9CA9007C9E17 /* chipmunk_ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_ffi.h; sourceTree = "<group>"; };
 		A9BBE8EB174C9CA9007C9E17 /* chipmunk_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chipmunk_private.h; sourceTree = "<group>"; };
@@ -965,6 +968,8 @@
 			children = (
 				679FE361173CA01900983108 /* FetchArmorTest.cpp */,
 				679FE362173CA01900983108 /* FetchArmorTest.h */,
+				A9BAAAC217B4FF5E008727B7 /* MasterDiffsTest.cpp */,
+				A9BAAAC317B4FF5E008727B7 /* MasterDiffsTest.h */,
 			);
 			name = Master;
 			path = Classes/Master;
@@ -2475,6 +2480,7 @@
 				A925CCC6175E056F001593E1 /* AssetTest.cpp in Sources */,
 				A9BAAAA817ABC430008727B7 /* LoadingModal.cpp in Sources */,
 				A9BAAAAF17AFB22F008727B7 /* MaintenanceTest.cpp in Sources */,
+				A9BAAAC417B4FF5F008727B7 /* MasterDiffsTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

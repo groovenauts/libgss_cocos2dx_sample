@@ -133,6 +133,7 @@ void LoginTestImpl::OnComplete(libgss::LoginResponse *response){
     }
     else{
         CCLOG("Login failure! error code: %d", response->code());
+        CCLOG("%s", response->message().c_str());
     }
 }
 
@@ -180,6 +181,7 @@ void LoginTestWithNoCallbackImpl::poll(float timer){
     }
     else{
         CCLOG("Login failure! error code: %d", response->code());
+        CCLOG("%s", response->message().c_str());
     }
     
     this->unschedule(schedule_selector(LoginTestWithNoCallbackImpl::poll));
@@ -188,7 +190,7 @@ void LoginTestWithNoCallbackImpl::poll(float timer){
 }
 
 //////////////////////////////////////////////////////////////////////////
-// implement LoginTestWithNoCallbackImpl
+// implement LoginTestWithRegisterImpl
 //////////////////////////////////////////////////////////////////////////
 
 std::string LoginTestWithRegisterImpl::subtitle(){
@@ -201,7 +203,7 @@ void LoginTestWithRegisterImpl::execute(){
     CCLOG("now sending login request...");
     
     libgss::LoginRequest *request = new libgss::LoginRequest("", "");
-    request->setCallback(this, gssLoginResponse(LoginTestImpl::OnComplete));
+    request->setCallback(this, gssLoginResponse(LoginTestWithRegisterImpl::OnComplete));
     libgss::Network::instance()->send(request);
     request->release();
     
@@ -217,6 +219,7 @@ void LoginTestWithRegisterImpl::OnComplete(libgss::LoginResponse *response){
     }
     else{
         CCLOG("Login failure! error code: %d", response->code());
+        CCLOG("%s", response->message().c_str());
     }
 }
 
