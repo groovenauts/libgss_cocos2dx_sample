@@ -9,6 +9,7 @@
 #include "Basic/MaintenanceTest.h"
 
 #include "Master/FetchArmorTest.h"
+#include "Master/MasterDiffsTest.h"
 
 #include "Update/GameDataTest.h"
 #include "Update/PlayerTest.h"
@@ -32,6 +33,7 @@ enum
     TEST_BULK_ACTION,
     TEST_API_ERROR,
     TEST_FETCH_ARMOR,
+    TEST_MASTER_DIFFS,
     TEST_GAME_DATA,
     TEST_PLAYER,
     TEST_ARMOR_UPGRADE1,
@@ -53,6 +55,7 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "Bulk Action",
     "API Error Test",
     "All Master",
+    "Master diffs",
     "Get/Update GameData",
     "Get/Update Player",
     "Get Dictionary",
