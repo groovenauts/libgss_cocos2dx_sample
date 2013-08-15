@@ -29,13 +29,11 @@ USING_NS_CC_EXT;
 const char* Settings::kDefaultConfigServerUrlBase = "http://localhost:3002";
 const char* Settings::kDefaultClientVersion = "develop";
 const char* Settings::kDefaultDeviceType = "1";
-const char* Settings::kDefaultMaintenanceStatusUrl = "http://localhost:3002/maintenance/";
 const char* Settings::kDefaultPublicAssetRoot = "http://localhost:3000/a/";
 
 const char* Settings::kSettingsKeyConfigServerUrlBase = "jp.groovenauts.libgss.config_server_url_base";
 const char* Settings::kSettingsKeyClientVersion = "jp.groovenauts.libgss.client_version";
 const char* Settings::kSettingsKeyDeviceType = "jp.groovenauts.libgss.device_type";
-const char* Settings::kSettingsKeyMaintenanceStatusUrl = "jp.groovenauts.libgss.maintenance_status_url";
 const char* Settings::kSettingsKeyPublicAssetRoot = "jp.groovenauts.libgss.public_asset_root";
 const char* Settings::kSettingsKeyConsumerSecret = "jp.groovenauts.libgss.consumer_secret";
 
@@ -55,13 +53,6 @@ void Settings::applySettings(){
     AppDelegate* appDelegate = ((AppDelegate*)CCApplication::sharedApplication());
     appDelegate->willStartLoadApiServerConfig();
     libgss::Network::instance()->initWithConfigServer(urlBase, clientVersion, deviceType, appDelegate);
-    
-    std::string maintenanceStatusUrl = CCUserDefault::sharedUserDefault()->getStringForKey(kSettingsKeyMaintenanceStatusUrl, "");
-    if (maintenanceStatusUrl == "") {
-        maintenanceStatusUrl = Settings::kDefaultMaintenanceStatusUrl;
-    }
-    libgss::Network::instance()->setMaintenanceStatusUrl(maintenanceStatusUrl);
-    CCLog("Maintenance status URL: %s", maintenanceStatusUrl.c_str());
     
     std::string publicAssetRoot = CCUserDefault::sharedUserDefault()->getStringForKey(kSettingsKeyPublicAssetRoot, "");
     if (publicAssetRoot == "") {
@@ -160,29 +151,8 @@ void SettingsLayer::onEnter()
         deviceTypeEditBox_->setText(deviceType.c_str());
     }
 
-    // メンテナンス情報サーバー
-    float maintenanceStatusUrlY = visibleOrigin.y + visibleSize.height * 4 / 10;
-    CCLabelTTF* maintenanceStatusUrlLabel = CCLabelTTF::create("Maintain stat URL", "Arial", 12);
-    maintenanceStatusUrlLabel->setPosition(ccp(60 + labelSize.width, maintenanceStatusUrlY));
-    maintenanceStatusUrlLabel->setColor(ccWHITE);
-    maintenanceStatusUrlLabel->setAnchorPoint(ccp(1, 0.5));
-    addChild(maintenanceStatusUrlLabel);
-    maintenanceStatusUrlEditBox_ = CCEditBox::create(editBoxSize, CCScale9Sprite::create("Images/orange_edit.png"));
-    maintenanceStatusUrlEditBox_->setPosition(ccp(editBoxX, maintenanceStatusUrlY));
-    maintenanceStatusUrlEditBox_->setPlaceHolder(Settings::kDefaultMaintenanceStatusUrl);
-    maintenanceStatusUrlEditBox_->setPlaceholderFontColor(ccGRAY);
-        maintenanceStatusUrlEditBox_->setReturnType(kKeyboardReturnTypeDone);
-    maintenanceStatusUrlEditBox_->setDelegate(this);
-    addChild(maintenanceStatusUrlEditBox_);
-    
-    std::string maintenanceStatusUrl
-    = CCUserDefault::sharedUserDefault()->getStringForKey(Settings::kSettingsKeyMaintenanceStatusUrl, "");
-    if (maintenanceStatusUrl != "") {
-        maintenanceStatusUrlEditBox_->setText(maintenanceStatusUrl.c_str());
-    }
-    
     // Public Asset Root設定
-    float publicAssetRootY = visibleOrigin.y + visibleSize.height * 3 / 10;
+    float publicAssetRootY = visibleOrigin.y + visibleSize.height * 4 / 10;
     CCLabelTTF* publicAssetRootLabel = CCLabelTTF::create("Public Asset Root", "Arial", 12);
     publicAssetRootLabel->setPosition(ccp(60 + labelSize.width, publicAssetRootY));
     publicAssetRootLabel->setColor(ccWHITE);
@@ -203,7 +173,7 @@ void SettingsLayer::onEnter()
     }
     
     // Consumer Secret
-    float consumerSecretY = visibleOrigin.y + visibleSize.height * 2 / 10;
+    float consumerSecretY = visibleOrigin.y + visibleSize.height * 3 / 10;
     CCLabelTTF* consumerSecretLabel = CCLabelTTF::create("Consumer Secret", "Arial", 12);
     consumerSecretLabel->setPosition(ccp(60 + labelSize.width, consumerSecretY));
     consumerSecretLabel->setColor(ccWHITE);
@@ -246,9 +216,6 @@ void SettingsLayer::editBoxEditingDidEnd(cocos2d::extension::CCEditBox* editBox)
     }
     else if(editBox == clientVersionEditBox_){
         key = Settings::kSettingsKeyClientVersion;
-    }
-    else if (editBox == maintenanceStatusUrlEditBox_){
-        key = Settings::kSettingsKeyMaintenanceStatusUrl;
     }
     else if(editBox == publicAssetRootEditBox_){
         key = Settings::kSettingsKeyPublicAssetRoot;

@@ -29,6 +29,8 @@ static TestScene* CreateTestScene(int nIdx)
         pScene = new ApiErrorTestScene(); break;
     case TEST_FETCH_ARMOR:
         pScene = new FetchArmorTestScene(); break;
+    case TEST_MASTER_DIFFS:
+        pScene = new MasterDiffsTestScene(); break;
     case TEST_GAME_DATA:
         pScene = new GameDataTestScene(); break;
     case TEST_PLAYER:

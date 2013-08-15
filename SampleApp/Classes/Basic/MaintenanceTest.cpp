@@ -125,10 +125,10 @@ void MaintenanceTestBasic::execute(){
 }
 
 void MaintenanceTestBasic::OnComplete(libgss::MaintenanceStatusResponse* response){
-    if (response->success() && response->maintenanceMessage() != "") {
-        CCLOG("completed.\n%s", response->maintenanceMessage().c_str());
+    if (response->isInMaintenance()) {
+        CCLOG("completed.\n%s", response->message().c_str());
     }
-    else if(response->code() == 404 || (response->success() && response->maintenanceMessage() == "")){
+    else if( response->success() || response->code() == 404){
         CCLOG("completed. Not in maintenance.");
     }
     else{
