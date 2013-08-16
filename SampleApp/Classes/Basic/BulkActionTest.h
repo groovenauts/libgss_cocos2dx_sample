@@ -39,7 +39,7 @@ public:
             CCLOG("New version client has released.");
         }
         else{
-            CCLOG("Error has occured.");
+            CCLOG("Error has occured. %d", response->code());
         }
     }
 };
@@ -57,7 +57,7 @@ public:
             CCLOG("New version client has released.");
         }
         else{
-            CCLOG("Error has occured.");
+            CCLOG("Error has occured. %d", response->code());
         }
     }
 };
