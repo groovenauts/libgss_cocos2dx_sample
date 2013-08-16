@@ -132,6 +132,6 @@ void MaintenanceTestBasic::OnComplete(libgss::MaintenanceStatusResponse* respons
         CCLOG("completed. Not in maintenance.");
     }
     else{
-        CCLOG("Error has occured.");
+        CCLOG("Error has occured. %d", response->code());
     }
 }

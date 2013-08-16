@@ -114,7 +114,6 @@ std::string SimpleActionTest1Action::subtitle(){
 
 void SimpleActionTest1Action::execute(){
     CCLOG("SimpleActionTest1Action::execute");
-    CCLOG("now sending request with bulk actions.");
     
     libgss::ActionRequest* request = new libgss::ActionRequest();
     request->setCallback(this, gssActionResponse(SimpleActionTest1Action::OnComplete));
@@ -186,7 +185,7 @@ void SimpleActionTestWithNoCallback::poll(float time){
         CCLOG("New version client has released.");
     }
     else{
-        CCLOG("Error has occured.");
+        CCLOG("Error has occured. %d", response->code());
     }
     
     request_->release();

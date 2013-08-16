@@ -64,6 +64,13 @@ void Settings::applySettings(){
     std::string consumerSecret = CCUserDefault::sharedUserDefault()->getStringForKey(kSettingsKeyConsumerSecret, "");
     libgss::Network::instance()->setConsumerSecret(consumerSecret);
     CCLog("Consumer secret: %s", consumerSecret.c_str());
+    
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+#if TARGET_IPHONE_SIMULATOR
+    libgss::Network::instance()->setUseSslLogin(false); // エミュレータでのテスト時はSSLを使用しない
+#endif
+#endif
 }
 
 void SettingsLayer::onEnter()

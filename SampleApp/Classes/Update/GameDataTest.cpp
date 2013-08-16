@@ -179,7 +179,7 @@ void GameDataTestGetAndUpdate::OnCompleteToGet(libgss::ActionResponse* response)
         return;
     }
     else{
-        CCLOG("Error has occured.");
+        CCLOG("Error has occured. %d", response->code());
         return;
     }
 

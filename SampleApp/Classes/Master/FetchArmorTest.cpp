@@ -150,7 +150,7 @@ void FetchArmorAction::OnComplete(libgss::ActionResponse* response){
         CCLOG("New version client has released.");
     }
     else{
-        CCLOG("Error has occured.");
+        CCLOG("Error has occured. %d", response->code());
     }
 }
 
@@ -263,7 +263,7 @@ void FetchArmorPaginateAction::OnComplete(libgss::ActionResponse* response){
         CCLOG("New version client has released.");
     }
     else{
-        CCLOG("Error has occured.");
+        CCLOG("Error has occured. %d", response->code());
     }
 }
 
