@@ -7,6 +7,7 @@
 #include "Basic/BulkActionTest.h"
 #include "Basic/ApiErrorTest.h"
 #include "Basic/MaintenanceTest.h"
+#include "Basic/AsyncActionRequestTest.h"
 
 #include "Master/FetchArmorTest.h"
 #include "Master/MasterDiffsTest.h"
@@ -31,6 +32,7 @@ enum
     TEST_LOGIN,
     TEST_SIMPLE_ACTION,
     TEST_BULK_ACTION,
+    TEST_ASYNC_ACTION,
     TEST_API_ERROR,
     TEST_FETCH_ARMOR,
     TEST_MASTER_DIFFS,
@@ -53,6 +55,7 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "Login",
     "Simple Action",
     "Bulk Action",
+    "Async Action Request",
     "API Error Test",
     "All Master",
     "Master diffs",

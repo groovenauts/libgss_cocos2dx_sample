@@ -25,6 +25,8 @@ enum
 {
     kBulkActionTest3Actions = 0,
     kBulkActionTest2Success1Error,
+    kBulkActionTest3ActionsIncludesSsl,
+    
     kBulkActionTestsCount,
 }; 
 
@@ -36,6 +38,7 @@ BaseNotificationLayer* createBulkActionTest(int nIndex)
     {
     case kBulkActionTest3Actions: return new BulkActionTest3Actions();
     case kBulkActionTest2Success1Error: return new BulkActionTest2Success1Error();
+    case kBulkActionTest3ActionsIncludesSsl: return new BulkActionTest3ActionsIncludesSsl();
     default: return 0;
     }
 }
@@ -92,7 +95,7 @@ void BulkActionTest::backCallback(CCObject* pSender)
 
 std::string BulkActionTest::title()
 {
-    return "Player sample";
+    return "Bulk action sample";
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -165,7 +168,7 @@ void BulkActionTest2Success1Error::execute(){
     CCLOG("now sending request with bulk actions.");
     
     libgss::ActionRequest* request = new libgss::ActionRequest();
-    request->setCallback(this, gssActionResponse(BulkActionTest3Actions::OnComplete));
+    request->setCallback(this, gssActionResponse(BulkActionTest2Success1Error::OnComplete));
     
     libgss::AllAction* action1 = new libgss::AllAction("Armor");
     action1->setId(1);
@@ -197,4 +200,49 @@ void BulkActionTest2Success1Error::execute(){
 }
 
 
+
+//////////////////////////////////////////////////////////////////////////
+// implement BulkActionTest3ActionsIncludesSsl
+//////////////////////////////////////////////////////////////////////////
+
+std::string BulkActionTest3ActionsIncludesSsl::subtitle(){
+    return "3. 3 actions. And 1 of them requires SSL.";
+}
+
+void BulkActionTest3ActionsIncludesSsl::execute(){
+    CCLOG("BulkActionTest3ActionsIncludesSsl::execute");
+    CCLOG("now sending request with bulk actions.");
+    
+    libgss::ActionRequest* request = new libgss::ActionRequest();
+    request->setCallback(this, gssActionResponse(BulkActionTest3ActionsIncludesSsl::OnComplete));
+    
+    libgss::AllAction* action1 = new libgss::AllAction("Armor");
+    action1->setId(1);
+    action1->orders()->add("armor_id", libgss::Orders::Orders::kAsc);
+    action1->conditions()->add("offence_pt$gte", 25);
+    request->addAction(action1);
+    
+    libgss::GetScheduleAction* action2 = new libgss::GetScheduleAction("ShopSchedule");
+    action2->setId(2);
+    action2->setSslRequired(true);
+    request->addAction(action2);
+    
+    libgss::JSONObject attrs;
+    libgss::Network* network = libgss::Network::instance();
+    attrs.set("sender_cd", network->playerId());
+    attrs.set("receiver_cd", "fontana:1000002");
+    attrs.set("send_at", time(NULL));
+    attrs.set("greeting_cd", 1);
+    libgss::CreateAction* action3 = new libgss::CreateAction("GreetingHistory", attrs);
+    action3->setId(3);
+    request->addAction(action3);
+    
+    libgss::Network::instance()->send(request);
+    request->release();
+    action1->release();
+    action2->release();
+    action3->release();
+    
+    CCLOG("sent request");
+}
 
