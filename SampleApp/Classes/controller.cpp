@@ -25,6 +25,8 @@ static TestScene* CreateTestScene(int nIdx)
         pScene = new SimpleActionTestScene(); break;
     case TEST_BULK_ACTION:
         pScene = new BulkActionTestScene(); break;
+    case TEST_ASYNC_ACTION:
+        pScene = new AsyncActionRequestTestScene(); break;
     case TEST_API_ERROR:
         pScene = new ApiErrorTestScene(); break;
     case TEST_FETCH_ARMOR:
