@@ -291,6 +291,7 @@
 		A9BBED13174CA506007C9E17 /* Slot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BBECFC174CA506007C9E17 /* Slot.cpp */; };
 		A9BBED14174CA506007C9E17 /* SlotData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BBECFE174CA506007C9E17 /* SlotData.cpp */; };
 		A9BBED15174CA506007C9E17 /* spine-cocos2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BBED00174CA506007C9E17 /* spine-cocos2dx.cpp */; };
+		A9D7FC5317F4276F0086B8A0 /* AsyncActionRequestTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D7FC5117F4276F0086B8A0 /* AsyncActionRequestTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -903,6 +904,8 @@
 		A9BBED00174CA506007C9E17 /* spine-cocos2dx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "spine-cocos2dx.cpp"; sourceTree = "<group>"; };
 		A9BBED01174CA506007C9E17 /* spine-cocos2dx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "spine-cocos2dx.h"; sourceTree = "<group>"; };
 		A9BBED02174CA506007C9E17 /* spine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spine.h; sourceTree = "<group>"; };
+		A9D7FC5117F4276F0086B8A0 /* AsyncActionRequestTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AsyncActionRequestTest.cpp; sourceTree = "<group>"; };
+		A9D7FC5217F4276F0086B8A0 /* AsyncActionRequestTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncActionRequestTest.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -958,6 +961,8 @@
 				A920FA601758854800F54B9C /* ApiErrorTest.h */,
 				A9BAAAAD17AFB22B008727B7 /* MaintenanceTest.cpp */,
 				A9BAAAAE17AFB22D008727B7 /* MaintenanceTest.h */,
+				A9D7FC5117F4276F0086B8A0 /* AsyncActionRequestTest.cpp */,
+				A9D7FC5217F4276F0086B8A0 /* AsyncActionRequestTest.h */,
 			);
 			name = Basic;
 			path = Classes/Basic;
@@ -2481,6 +2486,7 @@
 				A9BAAAA817ABC430008727B7 /* LoadingModal.cpp in Sources */,
 				A9BAAAAF17AFB22F008727B7 /* MaintenanceTest.cpp in Sources */,
 				A9BAAAC417B4FF5F008727B7 /* MasterDiffsTest.cpp in Sources */,
+				A9D7FC5317F4276F0086B8A0 /* AsyncActionRequestTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
