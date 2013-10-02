@@ -9,7 +9,6 @@
 #ifndef __SampleApp__CurlAssetTest__
 #define __SampleApp__CurlAssetTest__
 
-#include "curl/curl.h"
 #include "../BaseNotificationLayer.h"
 #include "../GroundLayer.h"
 #include <libGSS/libGSS.h>
@@ -31,16 +30,11 @@ public:
 };
 
 
-class CurlAssetTestBasic : public BaseNotificationLayer
+class CurlAssetTestSingleThread : public BaseNotificationLayer
 {
-    std::string filePath_;
-    char errorBuffer_[CURL_ERROR_SIZE];
 public:
     std::string subtitle();
     virtual void execute();
-    
-    void writeData(char *dataPtr, size_t size, size_t nmemb);
-    CURLcode doCurl(CURL *curl, std::string& url, std::vector<std::string> &headers, int* responseCode);
 };
 
 

@@ -164,7 +164,7 @@ void AssetTestBasic::OnComplete(libgss::AssetResponse* response){
     
     fclose(fp);
     
-    CCLOG("file was created. %s", path.c_str());
+    CCLOG("File has created. %s", path.c_str());
     
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
     CCSprite *icon = CCSprite::create(path.c_str(), CCRectMake(0, 0, 57, 57) );
@@ -249,7 +249,7 @@ void AssetTestWithNoCallback::poll(float time){
     
     request_->release();
     
-    CCLOG("file was created. %s", path.c_str());
+    CCLOG("File has created. %s", path.c_str());
     
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
     CCSprite *icon = CCSprite::create(path.c_str(), CCRectMake(0, 0, 114, 114) );
