@@ -1,11 +1,3 @@
-//
-//  CurlDownloadTask.cpp
-//  SampleApp
-//
-//  Created by 下川 北斗 on 2013/10/02.
-//
-//
-
 #include "CurlDownloadTask.h"
 
 #include "cocos2d.h"
@@ -82,11 +74,15 @@ CURLcode CurlDownloadTask::doCurl(CURL *curl){
     }
     
     // プログレスcallbackの設定
+    code = curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0);
+    if (code != CURLE_OK) {
+        return code;
+    }
     code = curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, progress_callback);
     if (code != CURLE_OK) {
         return code;
     }
-    code = curl_easy_setopt(curl, CURLOPT_WRITEDATA, this);
+    code = curl_easy_setopt(curl, CURLOPT_PROGRESSDATA, this);
     if (code != CURLE_OK) {
         return code;
     }

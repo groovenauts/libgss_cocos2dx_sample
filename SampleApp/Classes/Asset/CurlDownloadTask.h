@@ -1,11 +1,3 @@
-//
-//  CurlDownloadTask.h
-//  SampleApp
-//
-//  Created by 下川 北斗 on 2013/10/02.
-//
-//
-
 #ifndef __SampleApp__CurlDownloadTask__
 #define __SampleApp__CurlDownloadTask__
 

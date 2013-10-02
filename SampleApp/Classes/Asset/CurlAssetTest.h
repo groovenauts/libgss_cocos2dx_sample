@@ -36,7 +36,6 @@ class CurlAssetTestMultiThread : public BaseNotificationLayer, DownloadProgressC
     DownloadProgressChecker* responseChecker_ = NULL;
 
     pthread_t thread_;
-    // FIXME mutex
     
 public:
     ~CurlAssetTestMultiThread(){
@@ -54,7 +53,6 @@ public:
 
     // DownloadProgressCheckerDelegate 実装
     void notifyFinish();
-    // DownloadProgressCheckerDelegate 実装
     void notifyProgress(double total, double downloaded);
 };
 
