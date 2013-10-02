@@ -292,6 +292,7 @@
 		A9BBED14174CA506007C9E17 /* SlotData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BBECFE174CA506007C9E17 /* SlotData.cpp */; };
 		A9BBED15174CA506007C9E17 /* spine-cocos2dx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9BBED00174CA506007C9E17 /* spine-cocos2dx.cpp */; };
 		A9D7FC5317F4276F0086B8A0 /* AsyncActionRequestTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9D7FC5117F4276F0086B8A0 /* AsyncActionRequestTest.cpp */; };
+		A9FE3BAA17FBEF5000DDA758 /* CurlAssetTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9FE3BA817FBEF5000DDA758 /* CurlAssetTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -906,6 +907,8 @@
 		A9BBED02174CA506007C9E17 /* spine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spine.h; sourceTree = "<group>"; };
 		A9D7FC5117F4276F0086B8A0 /* AsyncActionRequestTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AsyncActionRequestTest.cpp; sourceTree = "<group>"; };
 		A9D7FC5217F4276F0086B8A0 /* AsyncActionRequestTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncActionRequestTest.h; sourceTree = "<group>"; };
+		A9FE3BA817FBEF5000DDA758 /* CurlAssetTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CurlAssetTest.cpp; sourceTree = "<group>"; };
+		A9FE3BA917FBEF5000DDA758 /* CurlAssetTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurlAssetTest.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1009,6 +1012,8 @@
 			children = (
 				A925CCC4175E056F001593E1 /* AssetTest.cpp */,
 				A925CCC5175E056F001593E1 /* AssetTest.h */,
+				A9FE3BA817FBEF5000DDA758 /* CurlAssetTest.cpp */,
+				A9FE3BA917FBEF5000DDA758 /* CurlAssetTest.h */,
 			);
 			name = Asset;
 			path = Classes/Asset;
@@ -2487,6 +2492,7 @@
 				A9BAAAAF17AFB22F008727B7 /* MaintenanceTest.cpp in Sources */,
 				A9BAAAC417B4FF5F008727B7 /* MasterDiffsTest.cpp in Sources */,
 				A9D7FC5317F4276F0086B8A0 /* AsyncActionRequestTest.cpp in Sources */,
+				A9FE3BAA17FBEF5000DDA758 /* CurlAssetTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
