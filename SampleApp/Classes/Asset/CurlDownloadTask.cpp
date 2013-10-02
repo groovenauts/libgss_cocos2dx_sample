@@ -22,29 +22,31 @@ size_t write_data_callback(char *ptr, size_t size, size_t nmemb, void *userdata)
 
 int progress_callback(void *clientp, double dltotal, double dlnow, double ultotal, double ulnow){
     CurlDownloadTask* task = (CurlDownloadTask*)clientp;
+    pthread_mutex_lock(&task->mutex);
     task->progress(dltotal, dlnow);
+    pthread_mutex_unlock(&task->mutex);
     
     return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////
-// implement
+// CurlDownloadTask implement
 //////////////////////////////////////////////////////////////////////////
 
 
-int CurlDownloadTask::execute(){
+void CurlDownloadTask::execute(){
+    finished_ = false;
     CURL *curl = curl_easy_init();
-    int responseCode = -1;
-    CURLcode code = this->doCurl(curl, &responseCode);
+    responseCode_ = -1;
+    CURLcode code = this->doCurl(curl);
     if (code != CURLE_OK) {
         CCLOG("Error on curl. Error code: %d", code);
     }
     curl_easy_cleanup(curl);
-    
-    return responseCode;
+    finished_ = true;
 }
 
-CURLcode CurlDownloadTask::doCurl(CURL *curl, int* responseCode){
+CURLcode CurlDownloadTask::doCurl(CURL *curl){
     CURLcode code;
     
     // HTTPヘッダの設定
@@ -112,8 +114,8 @@ CURLcode CurlDownloadTask::doCurl(CURL *curl, int* responseCode){
     
     curl_slist_free_all(cHeaders);
     
-    code = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, responseCode);
-    if (code != CURLE_OK || *responseCode != 200)
+    code = curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &responseCode_);
+    if (code != CURLE_OK || responseCode_ != 200)
     {
         code = CURLE_HTTP_RETURNED_ERROR;
     }
@@ -140,4 +142,44 @@ void CurlDownloadTask::writeData(char *dataPtr, size_t size, size_t nmemb){
 void CurlDownloadTask::progress(double total, double downloaded){
     totalSize_ = total;
     downloadedSize_ = downloaded;
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+// DownloadProgressChecker implement
+//////////////////////////////////////////////////////////////////////////
+
+DownloadProgressChecker::DownloadProgressChecker(CurlDownloadTask* task){
+    task_ = task;
+    task_->retain();
+}
+DownloadProgressChecker::~DownloadProgressChecker(){
+    if (task_) {
+        task_->release();
+    }
+}
+
+void DownloadProgressChecker::run(){
+    cocos2d::CCScheduler* scheduler = cocos2d::CCDirector::sharedDirector()->getScheduler();
+    scheduler->scheduleSelector(cocos2d::SEL_SCHEDULE(&DownloadProgressChecker::check), this, 0, false);
+}
+
+void DownloadProgressChecker::stop(){
+    cocos2d::CCScheduler* scheduler = cocos2d::CCDirector::sharedDirector()->getScheduler();
+    scheduler->unscheduleSelector(cocos2d::SEL_SCHEDULE(&DownloadProgressChecker::check), this);
+}
+
+void DownloadProgressChecker::check(){
+    CCLOG("execute DownloadProgressChecker::check");
+    if (task_->isFinished()) {
+        this->stop();
+        if (delegate) {
+            delegate->notifyFinish();
+        }
+    }
+    else if (task_->totalSize() > 0 && delegate){
+        pthread_mutex_lock(&task_->mutex);
+        delegate->notifyProgress(task_->totalSize(), task_->downloadedSize());
+        pthread_mutex_unlock(&task_->mutex);
+    }
 }

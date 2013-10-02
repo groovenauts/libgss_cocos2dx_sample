@@ -1,16 +1,9 @@
-//
-//  CurlAssetTest.h
-//  SampleApp
-//
-//  Created by 下川 北斗 on 2013/10/02.
-//
-//
-
 #ifndef __SampleApp__CurlAssetTest__
 #define __SampleApp__CurlAssetTest__
 
 #include "../BaseNotificationLayer.h"
 #include "../GroundLayer.h"
+#include "CurlDownloadTask.h"
 #include <libGSS/libGSS.h>
 #include <iostream>
 
@@ -37,6 +30,33 @@ public:
     virtual void execute();
 };
 
+class CurlAssetTestMultiThread : public BaseNotificationLayer, DownloadProgressCheckerDelegate
+{
+    CurlDownloadTask* task_ = NULL;
+    DownloadProgressChecker* responseChecker_ = NULL;
+
+    pthread_t thread_;
+    // FIXME mutex
+    
+public:
+    ~CurlAssetTestMultiThread(){
+        if (task_) {
+            task_->autorelease();
+        }
+        if (responseChecker_) {
+            responseChecker_->delegate = NULL;
+            responseChecker_->autorelease();
+        }
+    }
+    
+    std::string subtitle();
+    virtual void execute();
+
+    // DownloadProgressCheckerDelegate 実装
+    void notifyFinish();
+    // DownloadProgressCheckerDelegate 実装
+    void notifyProgress(double total, double downloaded);
+};
 
 
 #endif /* defined(__SampleApp__CurlAssetTest__) */
