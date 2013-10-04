@@ -24,6 +24,7 @@
 #include "Create/ItemOutgoingLogTest.h"
 
 #include "Asset/AssetTest.h"
+#include "Asset/CurlAssetTest.h"
 
 enum
 {
@@ -45,6 +46,7 @@ enum
     TEST_GREETING_HISTORY,
     TEST_ITEM_OUTGOING_LOG,
     TEST_ASSET,
+    TEST_CURL_ASSET,
     
     TESTS_COUNT,
 };
@@ -68,6 +70,7 @@ const std::string g_aTestNames[TESTS_COUNT] = {
     "Create/All History",
     "Create Log",
     "Asset Test",
+    "Curl Asset Test",
 };
 
 #endif
