@@ -120,6 +120,7 @@ void AssetTestBasic::execute(){
     CCLOG("AssetTestBasic::execute");
     CCLOG("now sending asset request.");
     
+    // リクエスト
     libgss::AssetRequest* request = new libgss::AssetRequest(false, "Icon.png", this, gssAssetResponse(AssetTestBasic::OnComplete));
     libgss::Network::instance()->send(request);
     request->release();
@@ -153,7 +154,7 @@ void AssetTestBasic::OnComplete(libgss::AssetResponse* response){
     
     fclose(fp);
     
-    CCLOG("file was created. %s", path.c_str());
+    CCLOG("File has created. %s", path.c_str());
     
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
     CCSprite *icon = CCSprite::create(path.c_str(), CCRectMake(0, 0, 57, 57) );
@@ -177,6 +178,7 @@ void AssetTestWithNoCallback::execute(){
     CCLOG("AssetTestWithNoCallback::execute");
     CCLOG("now sending asset request.");
     
+    // リクエスト
     request_ = new libgss::AssetRequest(false, "Icon@2x.png");
     libgss::Network::instance()->send(request_);
     
@@ -227,7 +229,7 @@ void AssetTestWithNoCallback::poll(float time){
     
     request_->release();
     
-    CCLOG("file was created. %s", path.c_str());
+    CCLOG("File has created. %s", path.c_str());
     
     CCSize winSize = CCDirector::sharedDirector()->getWinSize();
     CCSprite *icon = CCSprite::create(path.c_str(), CCRectMake(0, 0, 114, 114) );

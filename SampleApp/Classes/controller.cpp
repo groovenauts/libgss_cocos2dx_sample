@@ -51,6 +51,8 @@ static TestScene* CreateTestScene(int nIdx)
         pScene = new ItemOutgoingLogTestScene(); break;
     case TEST_ASSET:
         pScene = new AssetTestScene(); break;
+    case TEST_CURL_ASSET:
+        pScene = new CurlAssetTestScene(); break;
     default:
         break;
     }
