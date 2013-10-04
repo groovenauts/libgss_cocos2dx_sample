@@ -120,16 +120,6 @@ void AssetTestBasic::execute(){
     CCLOG("AssetTestBasic::execute");
     CCLOG("now sending asset request.");
     
-    // ダウンロードのテストなので、ファイルがすでに存在したらいったん削除
-    std::string path = CCFileUtils::sharedFileUtils()->getWritablePath().append("Icon.png");
-    FILE *fp;
-    if ((fp = fopen(path.c_str(), "r")) != NULL){
-        CCLOG("File is already exists : %s", path.c_str());
-        fclose(fp);
-        remove(path.c_str());
-        CCLOG("Removed File.");
-    }
-
     // リクエスト
     libgss::AssetRequest* request = new libgss::AssetRequest(false, "Icon.png", this, gssAssetResponse(AssetTestBasic::OnComplete));
     libgss::Network::instance()->send(request);
@@ -188,16 +178,6 @@ void AssetTestWithNoCallback::execute(){
     CCLOG("AssetTestWithNoCallback::execute");
     CCLOG("now sending asset request.");
     
-    // ダウンロードのテストなので、ファイルがすでに存在したらいったん削除
-    std::string path = CCFileUtils::sharedFileUtils()->getWritablePath().append("Icon@2x.png");
-    FILE *fp;
-    if ((fp = fopen(path.c_str(), "r")) != NULL){
-        CCLOG("File is already exists : %s", path.c_str());
-        fclose(fp);
-        remove(path.c_str());
-        CCLOG("Removed File.");
-    }
-
     // リクエスト
     request_ = new libgss::AssetRequest(false, "Icon@2x.png");
     libgss::Network::instance()->send(request_);

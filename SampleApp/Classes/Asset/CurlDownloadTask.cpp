@@ -122,7 +122,7 @@ CURLcode CurlDownloadTask::doCurl(CURL *curl){
 
 void CurlDownloadTask::writeData(char *dataPtr, size_t size, size_t nmemb){
     FILE *fp;
-    if ((fp = fopen(localPath_.c_str(), "w+")) == NULL) {
+    if ((fp = fopen(localPath_.c_str(), "a")) == NULL) {
         CCLOG("error has occured when opening file.");
         return;
     }
@@ -130,8 +130,6 @@ void CurlDownloadTask::writeData(char *dataPtr, size_t size, size_t nmemb){
     fwrite(dataPtr, size, nmemb, fp);
     
     fclose(fp);
-    
-    CCLOG("File has created. %s", localPath_.c_str());
 }
 
 
@@ -173,7 +171,7 @@ void DownloadProgressChecker::check(){
             delegate->notifyFinish();
         }
     }
-    else if (task_->totalSize() > 0 && delegate){
+    else if (task_->downloadedSize() > 0 && delegate){
         pthread_mutex_lock(&task_->mutex);
         delegate->notifyProgress(task_->totalSize(), task_->downloadedSize());
         pthread_mutex_unlock(&task_->mutex);

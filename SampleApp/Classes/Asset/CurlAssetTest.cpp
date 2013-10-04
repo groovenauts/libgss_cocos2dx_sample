@@ -119,7 +119,7 @@ void CurlAssetTestSingleThread::execute(){
     
     std::string filePath = CCFileUtils::sharedFileUtils()->getWritablePath().append("Icon@2x.png");
     
-    // ダウンロードのテストなので、ファイルがすでに存在したらいったん削除
+    // DL時にappendモードでファイルを書き込んでいくので、ファイルがすでに存在したらいったん削除
     FILE *fp;
     if ((fp = fopen(filePath.c_str(), "r")) != NULL){
         CCLOG("File is already exists : %s", filePath.c_str());
@@ -134,7 +134,8 @@ void CurlAssetTestSingleThread::execute(){
                         + "/api/1.0.0/assets?auth_token="
                         + network->authToken() + "&path=Icon@2x.png";
     std::vector<std::string> headers;
-    headers.push_back(std::string("X-Client-Version: ") + network->clientVersion());
+    headers.push_back(std::string("X-Client-Version: ") +
+                      network->clientVersion());
     headers.push_back(std::string("X-Device-Type: ") + network->deviceType());
     
     // ダウンロード
@@ -189,7 +190,7 @@ void CurlAssetTestMultiThread::execute(){
     
     std::string filePath = CCFileUtils::sharedFileUtils()->getWritablePath().append("Icon@2x.png");
     
-    // ダウンロードのテストなので、ファイルがすでに存在したらいったん削除
+    // DL時にappendモードでファイルを書き込んでいくので、ファイルがすでに存在したらいったん削除
     FILE *fp;
     if ((fp = fopen(filePath.c_str(), "r")) != NULL){
         CCLOG("File is already exists : %s", filePath.c_str());
@@ -227,7 +228,7 @@ void CurlAssetTestMultiThread::execute(){
 }
 
 void CurlAssetTestMultiThread::notifyFinish(){
-    CCLOG("HTTP status code is: %d", task_->responseCode());
+    CCLOG("finished. HTTP status code is: %d", task_->responseCode());
     
     if (task_->responseCode() == 200) {
         // ダウンロードした画像を表示
@@ -241,5 +242,10 @@ void CurlAssetTestMultiThread::notifyFinish(){
 }
 
 void CurlAssetTestMultiThread::notifyProgress(double total, double downloaded){
-    CCLOG("downloaded %f of %f ...", downloaded, total);
+    if (total > 0) {
+        CCLOG("downloaded %d of %d bytes...", (long)downloaded, (long)total);
+    }
+    else{
+        CCLOG("downloaded %d bytes...", (long)downloaded);
+    }
 }
