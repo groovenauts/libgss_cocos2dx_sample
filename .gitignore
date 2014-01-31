@@ -6,3 +6,4 @@ SampleApp/libs/cocos2dx/platform/android/java/gen
 SampleApp/libs/cocos2dx/platform/android/java/bin
 SampleApp/proj.android/gen
 SampleApp/proj.android/libs
+SampleApp/proj.android/assets
