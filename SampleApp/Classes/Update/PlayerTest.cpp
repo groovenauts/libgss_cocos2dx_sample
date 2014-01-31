@@ -166,7 +166,7 @@ void PlayerTestGetAndUpdate::OnCompleteToGet(libgss::ActionResponse* response) {
         return;
     }
     else{
-        CCLOG("Error has occured. %d", response->code());
+        CCLOG("Error has occured. %d\n%s", response->code(), response->message().c_str());
         return;
     }
 
