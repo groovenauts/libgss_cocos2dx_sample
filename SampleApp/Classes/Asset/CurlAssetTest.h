@@ -32,12 +32,17 @@ public:
 
 class CurlAssetTestMultiThread : public BaseNotificationLayer, DownloadProgressCheckerDelegate
 {
-    CurlDownloadTask* task_ = NULL;
-    DownloadProgressChecker* responseChecker_ = NULL;
+    CurlDownloadTask* task_;
+    DownloadProgressChecker* responseChecker_;
 
     pthread_t thread_;
     
 public:
+    
+    CurlAssetTestMultiThread()
+    :task_(NULL)
+    ,responseChecker_(NULL){}
+    
     ~CurlAssetTestMultiThread(){
         if (task_) {
             task_->autorelease();

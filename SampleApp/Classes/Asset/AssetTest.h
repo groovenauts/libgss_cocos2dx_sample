@@ -26,7 +26,7 @@ public:
 };
 
 
-class AssetTestBasic : public BaseNotificationLayer
+class PrivateAssetTest : public BaseNotificationLayer
 {
 public:
     std::string subtitle();
@@ -35,7 +35,7 @@ public:
 };
 
 
-class AssetTestWithNoCallback : public BaseNotificationLayer
+class PrivateAssetTestWithNoCallback : public BaseNotificationLayer
 {
     int pollingCount_;
     libgss::AssetRequest* request_;
@@ -43,6 +43,14 @@ public:
     std::string subtitle();
     virtual void execute();
     void poll(float time);
+};
+
+class PublicAssetTest : public BaseNotificationLayer
+{
+public:
+    std::string subtitle();
+    virtual void execute();
+    void OnComplete(libgss::AssetResponse* response);
 };
 
 

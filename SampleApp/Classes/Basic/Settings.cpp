@@ -29,12 +29,10 @@ USING_NS_CC_EXT;
 const char* Settings::kDefaultConfigServerUrlBase = "http://localhost:3002";
 const char* Settings::kDefaultClientVersion = "develop";
 const char* Settings::kDefaultDeviceType = "1";
-const char* Settings::kDefaultPublicAssetRoot = "http://localhost:3000/a/";
 
 const char* Settings::kSettingsKeyConfigServerUrlBase = "jp.groovenauts.libgss.config_server_url_base";
 const char* Settings::kSettingsKeyClientVersion = "jp.groovenauts.libgss.client_version";
 const char* Settings::kSettingsKeyDeviceType = "jp.groovenauts.libgss.device_type";
-const char* Settings::kSettingsKeyPublicAssetRoot = "jp.groovenauts.libgss.public_asset_root";
 const char* Settings::kSettingsKeyConsumerSecret = "jp.groovenauts.libgss.consumer_secret";
 
 
@@ -50,17 +48,12 @@ void Settings::applySettings(){
         deviceType = Settings::kDefaultDeviceType;
     }
     
+    libgss::Network::instance()->setPlatform("sampleapp1");
+    
     AppDelegate* appDelegate = ((AppDelegate*)CCApplication::sharedApplication());
     appDelegate->willStartLoadApiServerConfig();
     libgss::Network::instance()->initWithConfigServer(urlBase, clientVersion, deviceType, appDelegate);
     
-    std::string publicAssetRoot = CCUserDefault::sharedUserDefault()->getStringForKey(kSettingsKeyPublicAssetRoot, "");
-    if (publicAssetRoot == "") {
-        publicAssetRoot = kDefaultPublicAssetRoot;
-    }
-    libgss::Network::instance()->setPublicAssetRoot(publicAssetRoot);
-    CCLog("Public asset root: %s", publicAssetRoot.c_str());
-
     std::string consumerSecret = CCUserDefault::sharedUserDefault()->getStringForKey(kSettingsKeyConsumerSecret, "");
     libgss::Network::instance()->setConsumerSecret(consumerSecret);
     CCLog("Consumer secret: %s", consumerSecret.c_str());
@@ -158,29 +151,8 @@ void SettingsLayer::onEnter()
         deviceTypeEditBox_->setText(deviceType.c_str());
     }
 
-    // Public Asset Root設定
-    float publicAssetRootY = visibleOrigin.y + visibleSize.height * 4 / 10;
-    CCLabelTTF* publicAssetRootLabel = CCLabelTTF::create("Public Asset Root", "Arial", 12);
-    publicAssetRootLabel->setPosition(ccp(60 + labelSize.width, publicAssetRootY));
-    publicAssetRootLabel->setColor(ccWHITE);
-    publicAssetRootLabel->setAnchorPoint(ccp(1, 0.5));
-    addChild(publicAssetRootLabel);
-    publicAssetRootEditBox_ = CCEditBox::create(editBoxSize, CCScale9Sprite::create("Images/orange_edit.png"));
-    publicAssetRootEditBox_->setPosition(ccp(editBoxX, publicAssetRootY));
-    publicAssetRootEditBox_->setPlaceHolder(Settings::kDefaultPublicAssetRoot);
-    publicAssetRootEditBox_->setPlaceholderFontColor(ccGRAY);
-    publicAssetRootEditBox_->setMaxLength(8);
-    publicAssetRootEditBox_->setReturnType(kKeyboardReturnTypeDone);
-    publicAssetRootEditBox_->setDelegate(this);
-    addChild(publicAssetRootEditBox_);
-    
-    std::string publicAssetRoot = CCUserDefault::sharedUserDefault()->getStringForKey(Settings::kSettingsKeyPublicAssetRoot, "");
-    if (publicAssetRoot != "") {
-        publicAssetRootEditBox_->setText(publicAssetRoot.c_str());
-    }
-    
     // Consumer Secret
-    float consumerSecretY = visibleOrigin.y + visibleSize.height * 3 / 10;
+    float consumerSecretY = visibleOrigin.y + visibleSize.height * 4 / 10;
     CCLabelTTF* consumerSecretLabel = CCLabelTTF::create("Consumer Secret", "Arial", 12);
     consumerSecretLabel->setPosition(ccp(60 + labelSize.width, consumerSecretY));
     consumerSecretLabel->setColor(ccWHITE);
@@ -223,9 +195,6 @@ void SettingsLayer::editBoxEditingDidEnd(cocos2d::extension::CCEditBox* editBox)
     }
     else if(editBox == clientVersionEditBox_){
         key = Settings::kSettingsKeyClientVersion;
-    }
-    else if(editBox == publicAssetRootEditBox_){
-        key = Settings::kSettingsKeyPublicAssetRoot;
     }
     else if(editBox == consumerSecretEditBox_){
         key = Settings::kSettingsKeyConsumerSecret;
