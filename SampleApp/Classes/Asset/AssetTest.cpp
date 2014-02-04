@@ -22,8 +22,9 @@
 
 enum 
 {
-    kAssetTestBasic = 0,
-    kAssetTestWithNoCallback,
+    kPrivateAssetTest = 0,
+    kPrivateAssetTestWithNoCallback,
+    kPublicAssetTest,
     
     kAssetTestsCount,
 }; 
@@ -34,8 +35,9 @@ BaseNotificationLayer* createAssetTest(int nIndex)
 {
     switch(nIndex)
     {
-    case kAssetTestBasic: return new AssetTestBasic();
-    case kAssetTestWithNoCallback: return new AssetTestWithNoCallback();
+    case kPrivateAssetTest: return new PrivateAssetTest();
+    case kPrivateAssetTestWithNoCallback: return new PrivateAssetTestWithNoCallback();
+    case kPublicAssetTest: return new PublicAssetTest();
     default: return 0;
     }
 }
@@ -112,25 +114,25 @@ void AssetTestScene::runThisTest()
 // implement AssetTestBasic
 //////////////////////////////////////////////////////////////////////////
 
-std::string AssetTestBasic::subtitle(){
-    return "1. Basic asset request by using AssetRequest";
+std::string PrivateAssetTest::subtitle(){
+    return "1. Private asset request by using AssetRequest";
 }
 
-void AssetTestBasic::execute(){
+void PrivateAssetTest::execute(){
     CCLOG("AssetTestBasic::execute");
     CCLOG("now sending asset request.");
     
     // リクエスト
-    libgss::AssetRequest* request = new libgss::AssetRequest(false, "Icon.png", this, gssAssetResponse(AssetTestBasic::OnComplete));
+    libgss::AssetRequest* request = new libgss::AssetRequest(false, "Icon.png", this, gssAssetResponse(PrivateAssetTest::OnComplete));
     libgss::Network::instance()->send(request);
     request->release();
     
     CCLOG("sent request");
 }
 
-void AssetTestBasic::OnComplete(libgss::AssetResponse* response){
+void PrivateAssetTest::OnComplete(libgss::AssetResponse* response){
     if (!response->success()) {
-        CCLOG("error has occured when calling asset API. error code = %d", response->code());
+        CCLOG("Error has occured. %d\n%s", response->code(), response->message().c_str());
         return;
     }
     
@@ -169,12 +171,12 @@ void AssetTestBasic::OnComplete(libgss::AssetResponse* response){
 // implement AssetTestWithNoCallback
 //////////////////////////////////////////////////////////////////////////
 
-std::string AssetTestWithNoCallback::subtitle(){
+std::string PrivateAssetTestWithNoCallback::subtitle(){
     return "2. No callback pattern by using AssetRequest";
 }
 
 
-void AssetTestWithNoCallback::execute(){
+void PrivateAssetTestWithNoCallback::execute(){
     CCLOG("AssetTestWithNoCallback::execute");
     CCLOG("now sending asset request.");
     
@@ -184,12 +186,12 @@ void AssetTestWithNoCallback::execute(){
     
     pollingCount_ = 0;
     
-    this->schedule(schedule_selector(AssetTestWithNoCallback::poll));
+    this->schedule(schedule_selector(PrivateAssetTestWithNoCallback::poll));
     
     CCLOG("sent request");    
 }
 
-void AssetTestWithNoCallback::poll(float time){
+void PrivateAssetTestWithNoCallback::poll(float time){
     CCLOG("polling response. (%d)", ++pollingCount_);
     
     libgss::AssetResponse* response = request_->getResponseIfFinished();
@@ -200,10 +202,10 @@ void AssetTestWithNoCallback::poll(float time){
     
     CCLOG("received response.");
     
-    this->unschedule(schedule_selector(AssetTestWithNoCallback::poll));
+    this->unschedule(schedule_selector(PrivateAssetTestWithNoCallback::poll));
     
     if (!response->success()) {
-        CCLOG("error has occured when calling asset API. error code = %d", response->code());
+        CCLOG("Error has occured. %d\n%s", response->code(), response->message().c_str());
         return;
     }
     
@@ -238,3 +240,62 @@ void AssetTestWithNoCallback::poll(float time){
         this->addChild(icon);
     }
 }
+
+
+//////////////////////////////////////////////////////////////////////////
+// implement PublicAssetTest
+//////////////////////////////////////////////////////////////////////////
+
+std::string PublicAssetTest::subtitle(){
+    return "3. Public asset request by using AssetRequest";
+}
+
+void PublicAssetTest::execute(){
+    CCLOG("AssetTestBasic::execute");
+    CCLOG("now sending asset request.");
+    
+    // リクエスト
+    libgss::AssetRequest* request = new libgss::AssetRequest(true, "Default.png", this, gssAssetResponse(PublicAssetTest::OnComplete));
+    libgss::Network::instance()->send(request);
+    request->release();
+    
+    CCLOG("sent request");
+}
+
+void PublicAssetTest::OnComplete(libgss::AssetResponse* response){
+    if (!response->success()) {
+        CCLOG("Error has occured. %d\n%s", response->code(), response->message().c_str());
+        return;
+    }
+    
+    std::vector<char>* data = response->data();
+    if (data == NULL) {
+        CCLOG("no data has returned.");
+        return;
+    }
+    
+    std::string path = CCFileUtils::sharedFileUtils()->getWritablePath().append("Default.png");
+    FILE *fp;
+    if ((fp = fopen(path.c_str(), "w+")) == NULL) {
+        CCLOG("error has occured when opening file.");
+        return;
+    }
+    
+    for(std::vector<char>::iterator it = data->begin(); it != data->end(); it++){
+        char d =  *it;
+        fwrite(&d, sizeof(char), 1, fp);
+	}
+    
+    fclose(fp);
+    
+    CCLOG("File has created. %s", path.c_str());
+    
+    CCSprite *pict = CCSprite::create(path.c_str(), CCRectMake(-80, -120, 320, 480) );
+    if(pict){
+        CCSize winSize = CCDirector::sharedDirector()->getWinSize();
+        CCLOG(" ===> (%f, %f)", winSize.width, winSize.height);
+        pict->setPosition(cocos2d::CCPointMake(winSize.width / 2, winSize.height / 2));
+        this->addChild(pict);
+    }
+}
+

@@ -27,23 +27,23 @@ public:
     static const char* kDefaultConfigServerUrlBase;
     static const char* kDefaultClientVersion;
     static const char* kDefaultDeviceType;
-    static const char* kDefaultPublicAssetRoot;
     
     static const char* kSettingsKeyConfigServerUrlBase;
     static const char* kSettingsKeyClientVersion;
     static const char* kSettingsKeyDeviceType;
-    static const char* kSettingsKeyPublicAssetRoot;
     static const char* kSettingsKeyConsumerSecret;
 };
 
 class SettingsLayer : public CCLayer, public cocos2d::extension::CCEditBoxDelegate
 {
-    cocos2d::CCLabelTTF *messageLabel_ = NULL;
+    cocos2d::CCLabelTTF *messageLabel_;
     std::string message_;
     
 public:
-    SettingsLayer(){};
-    SettingsLayer(std::string message):message_(message){}
+    SettingsLayer():messageLabel_(NULL){};
+    SettingsLayer(std::string message)
+    :messageLabel_(NULL),
+    message_(message){}
     ~SettingsLayer(){};
     
     void onEnter();
@@ -57,7 +57,6 @@ private:
     cocos2d::extension::CCEditBox* configServerEditBox_;
     cocos2d::extension::CCEditBox* clientVersionEditBox_;
     cocos2d::extension::CCEditBox* deviceTypeEditBox_;
-    cocos2d::extension::CCEditBox* publicAssetRootEditBox_;
     cocos2d::extension::CCEditBox* consumerSecretEditBox_;
 };
 

@@ -14,14 +14,14 @@ class CurlDownloadTask: public cocos2d::CCObject{
     std::string url_;
     std::string localPath_;
     
-    double totalSize_ = 0;
-    double downloadedSize_ = 0;
+    double totalSize_ ;
+    double downloadedSize_;
     
     std::vector<std::string> httpHeaders_;
     char errorBuffer_[CURL_ERROR_SIZE];
     
     bool finished_;
-    int responseCode_ = -1;
+    int responseCode_;
     
 public:
     pthread_mutex_t mutex; // マルチスレッドで利用する場合用
@@ -31,7 +31,15 @@ public:
      @param url ダウンロードURL
      @param localPath ファイルが保存されるローカルのパス
      */
-    CurlDownloadTask(std::string url, std::string localPath):url_(url), localPath_(localPath){
+    CurlDownloadTask(std::string url, std::string localPath)
+        :url_(url)
+        ,localPath_(localPath)
+        ,totalSize_(0)
+        ,downloadedSize_(0)
+        ,httpHeaders_()
+        ,finished_()
+        ,responseCode_(-1)
+    {
         pthread_mutex_init(&mutex, NULL);
     }
     ~CurlDownloadTask(){
