@@ -5,6 +5,12 @@ if [ -z "${NDK_ROOT+aaa}" ];then
 echo "please define NDK_ROOT"
 exit 1
 fi
+
+if [ -z "${DISABLE_SSL+aaa}" ]; then
+echo "please define DISABLE_SSL=1 if you want to disable ssl"
+export DISABLE_SSL=0
+fi
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 APP_ROOT="$DIR/.."
 APP_ANDROID_ROOT="$DIR"

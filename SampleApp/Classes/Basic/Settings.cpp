@@ -48,7 +48,7 @@ void Settings::applySettings(){
         deviceType = Settings::kDefaultDeviceType;
     }
     
-    libgss::Network::instance()->setPlatform("sampleapp1");
+    libgss::Network::instance()->setPlatform("fontana");
     
     AppDelegate* appDelegate = ((AppDelegate*)CCApplication::sharedApplication());
     appDelegate->willStartLoadApiServerConfig();
@@ -58,11 +58,17 @@ void Settings::applySettings(){
     libgss::Network::instance()->setConsumerSecret(consumerSecret);
     CCLog("Consumer secret: %s", consumerSecret.c_str());
     
-#ifdef __APPLE__
-#include "TargetConditionals.h"
-#if TARGET_IPHONE_SIMULATOR
-    libgss::Network::instance()->setUseSslLogin(false); // エミュレータでのテスト時はSSLを使用しない
-#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	#include "TargetConditionals.h"
+	#if TARGET_IPHONE_SIMULATOR
+		libgss::Network::instance()->setUseSslLogin(false); // エミュレータでのテスト時はSSLを使用しない
+	#endif
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	#if DISABLE_SSL
+		libgss::Network::instance()->setUseSslLogin(false);
+	#endif
+#else
+	#error
 #endif
 }
 
